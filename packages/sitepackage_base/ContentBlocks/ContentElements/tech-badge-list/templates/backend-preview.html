@@ -1,0 +1,17 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <cb:link.editRecord uid="{data.uid}" table="{data.mainType}">{data.group_label}</cb:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+    <f:for each="{data.badges}" as="badge" iteration="i"><f:if condition="{i.isFirst} == false">, </f:if>{badge.label}</f:for>
+</f:section>
+
+</html>

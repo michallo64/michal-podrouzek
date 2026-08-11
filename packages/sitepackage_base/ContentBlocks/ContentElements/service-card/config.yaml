@@ -1,0 +1,25 @@
+name: sitepackage/service-card
+typeName: sitepackage_service_card
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: icon
+    type: Select
+    label: Icon
+    renderType: selectSingle
+    items:
+      - { label: Upgrade, value: upgrade }
+      - { label: Extension, value: extension }
+      - { label: Payment, value: payment }
+      - { label: Performance, value: performance }
+      - { label: Accessibility, value: accessibility }
+  -
+    identifier: header
+    useExistingField: true
+    label: Title
+  -
+    identifier: description
+    type: Textarea
+    label: Description

@@ -1,0 +1,20 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<section class="ce-cta-banner">
+    <h2 class="ce-cta-banner__heading">{data.header}</h2>
+    <f:if condition="{data.body}">
+        <p class="ce-cta-banner__body"><f:format.nl2br>{data.body}</f:format.nl2br></p>
+    </f:if>
+    <f:if condition="{data.button_link}">
+        <f:link.typolink parameter="{data.button_link}" class="ce-cta-banner__button">
+            <f:if condition="{data.button_label}">
+                <f:then>{data.button_label}</f:then>
+                <f:else>Get in touch</f:else>
+            </f:if>
+        </f:link.typolink>
+    </f:if>
+</section>
+</html>

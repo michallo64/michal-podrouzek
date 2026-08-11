@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-11T21:50:14+00:00" product-name="sitepackage/project-card">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Project Card</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>An anonymized project write-up: type, tech stack, scale and description. No client name field by design. Repeat inside a card grid.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

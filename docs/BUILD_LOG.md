@@ -15,9 +15,11 @@ without re-deriving context. Read this before making structural changes.
   below). Owns the TYPO3 13 **Site Set** (`Configuration/Sets/SitepackageBase/`),
   all structural TypoScript (`Configuration/TypoScript/{constants,setup,page,container}.typoscript`),
   all Fluid (`Resources/Private/{Layouts,Templates,Partials}`), structural
-  CSS driven by custom properties (`Resources/Public/Css/base.css`), and
-  `b13/container` grid presets (`Configuration/TCA/Overrides/tt_content.php`).
-  Full brand contract documented in `packages/sitepackage_base/README.md`.
+  CSS driven by custom properties (`Resources/Public/Css/base.css`),
+  `b13/container` grid presets (`Configuration/TCA/Overrides/tt_content.php`),
+  and 7 Content Blocks (`ContentBlocks/ContentElements/` — see "Session 3"
+  below). Full brand contract documented in
+  `packages/sitepackage_base/README.md`.
 - **`packages/sitepackage_promo`**: the brand layer only. Its Site Set
   (`Configuration/Sets/SitepackagePromo/`) depends on
   `podrouzek/sitepackage-base` (which itself depends on
@@ -214,3 +216,112 @@ install tool's "Analyze Database Structure") before assuming it's live —
   still work after the extension list changed — `extension:list` shows
   `container`, `sitepackage_base`, `sitepackage_promo`, `promo_showcase`
   all active.
+
+## Session 3: Content Blocks + a 3-column card grid
+
+Goal: build the 7 content blocks from the content-blocks brief, directly
+into `sitepackage_base` (not the old single-package layout, which no
+longer exists after Session 2).
+
+**Composer**: `friendsoftypo3/content-blocks` — the 2.x line requires
+TYPO3 14.3, incompatible with our 13.4 install; pinned to `^1.6` (resolved
+to 1.6.3) instead. Checked this on Packagist *before* attempting install,
+same as `b13/container` in Session 2 — always verify a new TYPO3 extension's
+core version constraint before requiring it.
+
+**Blocks** (all in `packages/sitepackage_base/ContentBlocks/ContentElements/`,
+vendor `sitepackage`): `hero`, `service-card`, `project-card`, `stat-strip`,
+`timeline-entry`, `tech-badge-list`, `cta-banner`. Scaffolded via
+`typo3 content-blocks:create --no-interaction` per block (reliable
+boilerplate — folder structure, config.yaml skeleton, both Fluid
+templates, labels.xlf), then hand-edited fields/templates/labels.
+
+- **Renamed** "Case Study Card" → **Project Card** per the site-split
+  brief's instruction to genericize block names before any backend
+  records reference them (this was the first thing built after the
+  rename requirement, so there was no migration to do — just named it
+  right from the start).
+- **No client name field** on Project Card, by design — matches the
+  project's anonymization constraint (see root `CLAUDE.md`).
+- Fields reuse the core `header` field via `useExistingField: true` where
+  it plays the role of a title (Hero, Service Card, Project Card, Timeline
+  Entry, CTA Banner) — new dedicated fields only where there wasn't a
+  suitable existing one. Tech stack on Project Card is a plain
+  comma-separated `Text` field, not a `Category` relation — avoids needing
+  to pre-seed a `sys_category` taxonomy for a handful of tags on a small
+  site.
+- Stat Strip and Tech Badge List use `Collection` fields (IRRE). Content
+  Blocks auto-generates a child table per collection
+  (`sitepackage_statstrip_stats`, `sitepackage_techbadgelist_badges`) with
+  a `foreign_table_parent_uid` column linking back to the parent
+  `tt_content` row, and the parent's own field
+  (`sitepackage_statstrip_stats` etc.) stores the **count** of children —
+  `DESCRIBE`d the generated tables before writing any SQL rather than
+  guessing the schema.
+- After every `config.yaml` change: `rm -rf var/cache/*` + `cache:flush` +
+  `extension:setup --extension=sitepackage_base` — same schema-migration
+  gotcha as the `b13/container` bug in Session 2, and it bit again here
+  (new `tt_content` columns + two new tables) until schema setup was run.
+- `typo3 content-blocks:lint` caught nothing wrong on the first pass, but
+  ran it before every schema-setup step regardless — cheap and catches
+  YAML mistakes before they become a confusing runtime error.
+
+**Container grid**: added a third preset, `sitepackage-cardgrid3`
+("Card Grid (3 columns)"), alongside the two from Session 2 — CSS grid,
+1 column mobile / 2 tablet (`min-width: 40rem`) / 3 desktop
+(`min-width: 64rem`), in `base.css` as `.ce-card-grid`. Registered with an
+`allowed: {CType: 'sitepackage_service_card, sitepackage_project_card'}`
+restriction on its column, **but this is not actually enforced**: per
+`b13/container`'s own README, `allowed`/`disallowed` only take effect with
+`ichhabrecht/content-defender` installed, and that extension's latest
+release (3.5.3) caps out at TYPO3 12.1 — it does not support 13.4. Checked
+on Packagist before deciding; not worth pulling in an unsupported/
+unmaintained dependency just for this. The `allowed` key is left in place
+as declarative intent (self-documenting, forward-compatible if
+content_defender ever adds v13 support) and callers are trusted to pick
+the right card type for now. If this ever needs real enforcement, look
+for a content_defender v13 release first before reaching for a custom
+solution.
+
+**Content assembly**: pages rebuilt directly via SQL (`tt_content` +
+the two collection child tables), the same approach as Session 1's
+placeholder content. Container parent/child linking is fully mechanical —
+just `pid`, `colPos` (`0` for the container itself, `230` for this card
+grid's single column, per the `Configuration/TCA/Overrides/tt_content.php`
+registration), and `tx_container_parent` = the container row's `uid` — no
+DataHandler needed, this isn't IRRE. IRRE (Collections) *does* need the
+child rows written to the generated child table with the correct
+`foreign_table_parent_uid`, and the parent's count field set to match, as
+above.
+
+- **Home**: Hero → Stat Strip (10+ years / 3 extensions / 100% Composer)
+  → CTA Banner.
+- **Services**: header → Card Grid (3 col) with 5 Service Cards → Tech
+  Badge List → CTA Banner.
+- **Case Studies**: header → Card Grid (3 col) with the 3 Project Cards
+  (content carried over from Session 1's placeholder text elements,
+  reshaped into the new fields) → CTA Banner.
+- **About**: header → intro text (unchanged from Session 1) → Tech Badge
+  List → three Timeline Entries stacked directly at colPos 0 (deliberately
+  *not* wrapped in the "One Column" container — the brief calls for a
+  plain stacked list here, and the existing spacing/border-bottom on
+  `.ce-timeline-entry` already gives consistent rhythm without one) → CTA
+  Banner.
+- **Contact**: left untouched — out of scope for this session's block set.
+
+### Verification performed
+
+- `content-blocks:lint` — clean.
+- Curled `/`, all four rebuilt pages, `sitemap.xml` — all 200.
+- Grepped rendered HTML for every block's CSS-class-scoped content
+  (`ce-hero__heading`, `ce-stat-strip__number`, `ce-service-card__title`
+  ×5, `ce-project-card__*` ×3 with no client names, `ce-timeline-entry__*`
+  ×3) to confirm real data reached the frontend, not just that the page
+  returned 200.
+- Backend Page module on Services: confirmed the "Card Grid (3 columns)"
+  container shows its 5 Service Card children nested inside it, no PHP
+  warnings.
+- Screenshotted the rendered Home and Services pages — card grid is
+  visibly 3 columns at desktop width, brand orange accent applied
+  correctly throughout (proof the base/brand split from Session 2 still
+  works end to end with real content on top of it).

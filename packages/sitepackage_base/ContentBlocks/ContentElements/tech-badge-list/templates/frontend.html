@@ -1,0 +1,16 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<div class="ce-tech-badge-list">
+    <f:if condition="{data.group_label}">
+        <h4 class="ce-tech-badge-list__group">{data.group_label}</h4>
+    </f:if>
+    <ul class="ce-tech-badge-list__badges">
+        <f:for each="{data.badges}" as="badge">
+            <li class="ce-tech-badge-list__badge">{badge.label}</li>
+        </f:for>
+    </ul>
+</div>
+</html>

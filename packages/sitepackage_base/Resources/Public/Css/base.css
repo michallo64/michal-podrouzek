@@ -124,3 +124,108 @@ a {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* Card grid: mobile 1 col, tablet 2, desktop 3 — used by Service Card and
+   Project Card content blocks via the "Card Grid (3 columns)" container. */
+.ce-card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+@media (min-width: 40rem) {
+    .ce-card-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 64rem) {
+    .ce-card-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/*
+ * Content block structural styles. Deliberately minimal (spacing/typography
+ * only, using the custom properties above) — visual design is a later pass;
+ * these classes (ce-hero, ce-service-card, etc.) are the stable hooks it
+ * will style against.
+ */
+.ce-hero,
+.ce-cta-banner {
+    padding: var(--space-lg) 0;
+    text-align: center;
+}
+
+.ce-hero__cta,
+.ce-cta-banner__button {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-weight: 600;
+}
+
+.ce-service-card,
+.ce-project-card {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+}
+
+.ce-service-card__icon {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: var(--space-sm);
+    border-radius: 50%;
+    background: var(--color-border);
+}
+
+.ce-project-card__meta,
+.ce-project-card__scale,
+.ce-timeline-entry__date {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+}
+
+.ce-stat-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+}
+
+.ce-stat-strip__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.ce-stat-strip__number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.ce-stat-strip__label {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+}
+
+.ce-timeline-entry {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.ce-tech-badge-list__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    list-style: none;
+    margin: var(--space-xs) 0 0;
+    padding: 0;
+}
+
+.ce-tech-badge-list__badge {
+    padding: 0.125rem var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+}

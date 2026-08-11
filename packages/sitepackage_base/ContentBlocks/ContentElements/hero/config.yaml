@@ -1,0 +1,23 @@
+name: sitepackage/hero
+typeName: sitepackage_hero
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: header
+    useExistingField: true
+    label: Heading
+  -
+    identifier: subheading
+    type: Text
+    label: Subheading
+  -
+    identifier: cta_label
+    type: Text
+    label: 'CTA label'
+  -
+    identifier: cta_link
+    type: Link
+    label: 'CTA link'
+    nullable: true

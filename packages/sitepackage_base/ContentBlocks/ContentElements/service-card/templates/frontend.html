@@ -1,0 +1,15 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<article class="ce-service-card">
+    <f:if condition="{data.icon}">
+        <span class="ce-service-card__icon ce-service-card__icon--{data.icon}" aria-hidden="true"></span>
+    </f:if>
+    <h3 class="ce-service-card__title">{data.header}</h3>
+    <f:if condition="{data.description}">
+        <p class="ce-service-card__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
+    </f:if>
+</article>
+</html>

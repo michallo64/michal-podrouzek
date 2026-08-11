@@ -1,0 +1,23 @@
+name: sitepackage/cta-banner
+typeName: sitepackage_cta_banner
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: header
+    useExistingField: true
+    label: Heading
+  -
+    identifier: body
+    type: Textarea
+    label: Body
+  -
+    identifier: button_label
+    type: Text
+    label: 'Button label'
+  -
+    identifier: button_link
+    type: Link
+    label: 'Button link'
+    nullable: true

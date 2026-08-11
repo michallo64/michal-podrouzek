@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-11T21:50:14+00:00" product-name="sitepackage/hero">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Hero</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>Page-top hero: heading, subheading and an optional call-to-action link.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

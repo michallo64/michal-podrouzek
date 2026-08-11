@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-11T21:50:14+00:00" product-name="sitepackage/stat-strip">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Stat Strip</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>A row of 3-4 number/label pairs, e.g. "10+ / Years of experience".</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-11T21:50:14+00:00" product-name="sitepackage/tech-badge-list">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Tech Badge List</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>A labeled group of small tech/skill badges, e.g. "Backend: TYPO3, PHP, MariaDB".</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

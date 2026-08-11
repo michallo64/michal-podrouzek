@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-11T21:50:14+00:00" product-name="sitepackage/timeline-entry">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Timeline Entry</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>One entry in a stacked timeline: date range, title, description. Not used inside a grid container.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

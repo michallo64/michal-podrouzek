@@ -1,0 +1,23 @@
+name: sitepackage/tech-badge-list
+typeName: sitepackage_tech_badge_list
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: group_label
+    type: Text
+    label: 'Group label'
+    placeholder: 'e.g. Backend, Frontend, Tools'
+  -
+    identifier: badges
+    type: Collection
+    label: Badges
+    labelField: label
+    minitems: 1
+    fields:
+      -
+        identifier: label
+        type: Text
+        label: Badge
+        placeholder: 'e.g. TYPO3, PHP 8, MariaDB'

@@ -1,0 +1,20 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<section class="ce-hero">
+    <h1 class="ce-hero__heading">{data.header}</h1>
+    <f:if condition="{data.subheading}">
+        <p class="ce-hero__subheading">{data.subheading}</p>
+    </f:if>
+    <f:if condition="{data.cta_link}">
+        <f:link.typolink parameter="{data.cta_link}" class="ce-hero__cta">
+            <f:if condition="{data.cta_label}">
+                <f:then>{data.cta_label}</f:then>
+                <f:else>Learn more</f:else>
+            </f:if>
+        </f:link.typolink>
+    </f:if>
+</section>
+</html>

@@ -1,0 +1,24 @@
+name: sitepackage/stat-strip
+typeName: sitepackage_stat_strip
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: stats
+    type: Collection
+    label: Stats
+    labelField: label
+    minitems: 3
+    maxitems: 4
+    fields:
+      -
+        identifier: number
+        type: Text
+        label: Number
+        placeholder: 'e.g. 10+, 25, 100%'
+      -
+        identifier: label
+        type: Text
+        label: Label
+        placeholder: 'e.g. Years of experience'

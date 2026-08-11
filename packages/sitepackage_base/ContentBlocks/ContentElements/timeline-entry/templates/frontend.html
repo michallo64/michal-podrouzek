@@ -1,0 +1,15 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<article class="ce-timeline-entry">
+    <f:if condition="{data.date_range}">
+        <p class="ce-timeline-entry__date">{data.date_range}</p>
+    </f:if>
+    <h3 class="ce-timeline-entry__title">{data.header}</h3>
+    <f:if condition="{data.description}">
+        <p class="ce-timeline-entry__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
+    </f:if>
+</article>
+</html>

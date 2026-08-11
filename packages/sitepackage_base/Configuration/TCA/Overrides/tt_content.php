@@ -36,4 +36,28 @@ call_user_func(static function (): void {
             ]
         ))->setIcon('container-2col')
     );
+
+    // Card grid: desktop 3 columns / tablet 2 / mobile 1 (see base.css
+    // .ce-card-grid). Intended for Service Card and Project Card content
+    // blocks — the `allowed` restriction below is declarative documentation
+    // of that intent, not enforced: it only takes effect with
+    // EXT:content_defender installed, which does not yet support TYPO3 13.
+    // Editors are trusted to place the right block here for now; revisit if
+    // content_defender adds v13 support.
+    $registry->configureContainer(
+        (new \B13\Container\Tca\ContainerConfiguration(
+            'sitepackage-cardgrid3',
+            'Card Grid (3 columns)',
+            'A responsive grid (3 / 2 / 1 columns) for Service Card or Project Card content blocks.',
+            [
+                [
+                    [
+                        'name' => 'Cards',
+                        'colPos' => 230,
+                        'allowed' => ['CType' => 'sitepackage_service_card, sitepackage_project_card'],
+                    ],
+                ],
+            ]
+        ))->setIcon('container-3col')
+    );
 });

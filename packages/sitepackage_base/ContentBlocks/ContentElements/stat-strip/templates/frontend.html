@@ -1,0 +1,14 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<div class="ce-stat-strip">
+    <f:for each="{data.stats}" as="stat">
+        <div class="ce-stat-strip__item">
+            <span class="ce-stat-strip__number">{stat.number}</span>
+            <span class="ce-stat-strip__label">{stat.label}</span>
+        </div>
+    </f:for>
+</div>
+</html>

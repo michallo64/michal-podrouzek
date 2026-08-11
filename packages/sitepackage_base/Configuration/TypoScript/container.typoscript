@@ -21,3 +21,14 @@ tt_content.sitepackage-2col {
         100 = B13\Container\DataProcessing\ContainerProcessor
     }
 }
+
+tt_content.sitepackage-cardgrid3 < lib.contentElement
+tt_content.sitepackage-cardgrid3 {
+    templateName = CardGrid3
+    templateRootPaths {
+        10 = EXT:sitepackage_base/Resources/Private/Templates/Container/
+    }
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}

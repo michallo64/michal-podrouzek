@@ -11,8 +11,11 @@ custom extension, built to read as production-quality TYPO3 13 LTS work.
 - `packages/sitepackage_base` — the reusable, brand-neutral starter kit:
   TypoScript (split into constants/setup/page/container partials), a
   TYPO3 13 **Site Set**, Fluid layout + partials, structural CSS driven
-  entirely by CSS custom properties, `b13/container` grid presets. Meant
-  to be lifted into future relaunch projects unmodified — see
+  entirely by CSS custom properties, `b13/container` grid presets, and
+  7 Content Blocks (Hero, Service Card, Project Card, Stat Strip, Timeline
+  Entry, Tech Badge List, CTA Banner — see
+  `packages/sitepackage_base/ContentBlocks/`). Meant to be lifted into
+  future relaunch projects unmodified — see
   `packages/sitepackage_base/README.md` for the brand contract it expects
   a brand package to fulfill.
 - `packages/sitepackage_promo` — the brand layer for this specific site:

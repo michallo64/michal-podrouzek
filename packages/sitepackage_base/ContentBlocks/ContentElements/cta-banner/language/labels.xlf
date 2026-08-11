@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-11T21:50:14+00:00" product-name="sitepackage/cta-banner">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>CTA Banner</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>Reusable call-to-action block for the bottom of a page: heading, body text, and a button.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

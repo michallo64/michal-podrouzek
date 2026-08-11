@@ -1,0 +1,21 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<article class="ce-project-card">
+    <h3 class="ce-project-card__title">{data.header}</h3>
+    <f:if condition="{data.project_type}">
+        <p class="ce-project-card__meta">{data.project_type}</p>
+    </f:if>
+    <f:if condition="{data.description}">
+        <p class="ce-project-card__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
+    </f:if>
+    <f:if condition="{data.tech_stack}">
+        <p class="ce-project-card__tech">{data.tech_stack}</p>
+    </f:if>
+    <f:if condition="{data.scale}">
+        <p class="ce-project-card__scale">{data.scale}</p>
+    </f:if>
+</article>
+</html>

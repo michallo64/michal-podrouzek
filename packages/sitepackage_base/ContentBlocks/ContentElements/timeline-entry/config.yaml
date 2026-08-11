@@ -1,0 +1,19 @@
+name: sitepackage/timeline-entry
+typeName: sitepackage_timeline_entry
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: date_range
+    type: Text
+    label: 'Year / date range'
+    placeholder: 'e.g. 2022–2024'
+  -
+    identifier: header
+    useExistingField: true
+    label: Title
+  -
+    identifier: description
+    type: Textarea
+    label: Description
