@@ -1,0 +1,18 @@
+/*
+ * Brand layer: the only file a future relaunch project needs to touch to
+ * reskin the site. Overrides sitepackage_base's neutral custom properties
+ * on :root — nothing structural belongs in this file. See
+ * sitepackage_base/README.md "Brand contract" for the full property list.
+ */
+:root {
+    --color-bg: #ffffff;
+    --color-text: #14181f;
+    --color-muted: #5b6472;
+    --color-accent: #d9480f;
+    --color-border: #e3e6eb;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+}

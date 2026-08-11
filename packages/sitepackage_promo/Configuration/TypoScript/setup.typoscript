@@ -1,0 +1,6 @@
+# Everything structural (config, meta wiring, content rendering, PAGE
+# object, Fluid paths) lives in sitepackage_base. This package only adds
+# the brand stylesheet on top of it.
+page.includeCSS {
+    brand = EXT:sitepackage_promo/Resources/Public/Css/brand.css
+}

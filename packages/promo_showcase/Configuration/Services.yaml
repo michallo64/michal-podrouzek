@@ -1,0 +1,44 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Podrouzek\PromoShowcase\:
+    resource: '../Classes/*'
+
+  dashboard.widget.promoShowcaseExperienceYears:
+    class: 'TYPO3\CMS\Dashboard\Widgets\NumberWithIconWidget'
+    arguments:
+      $dataProvider: '@Podrouzek\PromoShowcase\Dashboard\ExperienceYearsDataProvider'
+      $options:
+        title: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.experienceYears.title'
+        subtitle: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.experienceYears.subtitle'
+        icon: 'actions-clock'
+    tags:
+      - name: dashboard.widget
+        identifier: 'promoShowcaseExperienceYears'
+        groupNames: 'promoShowcase'
+        title: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.experienceYears.title'
+        description: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.experienceYears.description'
+        iconIdentifier: 'actions-clock'
+        height: 'small'
+        width: 'small'
+
+  dashboard.widget.promoShowcaseExtensionsShipped:
+    class: 'TYPO3\CMS\Dashboard\Widgets\NumberWithIconWidget'
+    arguments:
+      $dataProvider: '@Podrouzek\PromoShowcase\Dashboard\ExtensionsShippedDataProvider'
+      $options:
+        title: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.extensionsShipped.title'
+        subtitle: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.extensionsShipped.subtitle'
+        icon: 'module-extensionmanager'
+    tags:
+      - name: dashboard.widget
+        identifier: 'promoShowcaseExtensionsShipped'
+        groupNames: 'promoShowcase'
+        title: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.extensionsShipped.title'
+        description: 'LLL:EXT:promo_showcase/Resources/Private/Language/locallang_dashboard.xlf:widget.extensionsShipped.description'
+        iconIdentifier: 'module-extensionmanager'
+        height: 'small'
+        width: 'small'

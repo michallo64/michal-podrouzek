@@ -1,0 +1,34 @@
+config {
+    doctype = html5
+    no_cache = 0
+    debug = 0
+    admPanel = 0
+    disablePrefixComment = 1
+    removeDefaultJS = external
+    concatenateCss = 1
+    concatenateJs = 1
+    compressCss = 1
+    compressJs = 1
+
+    additionalHeaders {
+        10.header = X-Content-Type-Options: nosniff
+        20.header = Referrer-Policy: strict-origin-when-cross-origin
+    }
+}
+
+# Meta description is read from the backend "Description" page field —
+# editors control it per page, nothing is hardcoded in the template.
+page.meta.description.data = page:description
+page.meta.viewport = width=device-width, initial-scale=1
+
+# Renders the main (colPos 0) tt_content column; every page template uses
+# a single content column, so this stays a direct query rather than a
+# generic colPos-parameterized helper.
+lib.dynamicContent = CONTENT
+lib.dynamicContent {
+    table = tt_content
+    select {
+        orderBy = sorting
+        where = colPos = 0
+    }
+}

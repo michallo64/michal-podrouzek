@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-08-11" product-name="promo_showcase">
+        <header/>
+        <body>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone" resname="tx_promoshowcase_domain_model_milestone">
+                <source>Career Milestone</source>
+            </trans-unit>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone.milestone_type" resname="tx_promoshowcase_domain_model_milestone.milestone_type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone.milestone_type.careerStart" resname="tx_promoshowcase_domain_model_milestone.milestone_type.careerStart">
+                <source>Career start</source>
+            </trans-unit>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone.milestone_type.extensionShipped" resname="tx_promoshowcase_domain_model_milestone.milestone_type.extensionShipped">
+                <source>Extension shipped</source>
+            </trans-unit>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone.title" resname="tx_promoshowcase_domain_model_milestone.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone.milestone_date" resname="tx_promoshowcase_domain_model_milestone.milestone_date">
+                <source>Date</source>
+            </trans-unit>
+            <trans-unit id="tx_promoshowcase_domain_model_milestone.description" resname="tx_promoshowcase_domain_model_milestone.description">
+                <source>Description</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

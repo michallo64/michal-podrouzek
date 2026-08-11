@@ -1,0 +1,21 @@
+{
+	"name": "podrouzek/sitepackage-promo",
+	"type": "typo3-cms-extension",
+	"description": "Brand layer for Michal Podroužek's personal TYPO3 promo/portfolio site: CSS custom properties, site identity constants, and page content. All structural TypoScript/Fluid lives in sitepackage_base.",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Michal Podroužek",
+			"email": "podrouzekmichal@gmail.com"
+		}
+	],
+	"require": {
+		"typo3/cms-core": "^13.4",
+		"podrouzek/sitepackage-base": "@dev"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "sitepackage_promo"
+		}
+	}
+}

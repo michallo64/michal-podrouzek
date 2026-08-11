@@ -1,0 +1,126 @@
+/*
+ * Structural CSS only — no brand colors, fonts, or spacing values are
+ * hardcoded here. Every visual property reads from a CSS custom property
+ * with a neutral fallback, so this file renders sensibly unbranded.
+ * A brand package (e.g. sitepackage_promo/Resources/Public/Css/brand.css)
+ * overrides the custom properties on :root — see sitepackage_base/README.md
+ * "Brand contract" for the full list.
+ */
+:root {
+    --color-bg: #ffffff;
+    --color-text: #101820;
+    --color-muted: #5a6472;
+    --color-accent: #1c5cff;
+    --color-border: #e4e7eb;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.25rem;
+    --space-lg: 1.5rem;
+
+    /* Layout constant, not part of the brand contract. */
+    --layout-content-width: 72rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.5;
+}
+
+a {
+    color: var(--color-accent);
+}
+
+.site-header__inner,
+.site-footer__inner,
+.content-area {
+    max-width: var(--layout-content-width);
+    margin: 0 auto;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.site-header {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm) var(--space-lg);
+}
+
+.site-header__brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.site-header__logo {
+    max-height: 2.5rem;
+    width: auto;
+}
+
+.site-header__name {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.site-header__tagline {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+}
+
+.site-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.site-nav a:hover,
+.site-nav__item.is-active a {
+    color: var(--color-accent);
+}
+
+.site-main {
+    min-height: 60vh;
+}
+
+.site-footer {
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+}
+
+.site-footer__inner p {
+    margin: 0.25rem 0;
+}
+
+.container-grid--two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+    .container-grid--two-col {
+        grid-template-columns: 1fr 1fr;
+    }
+}

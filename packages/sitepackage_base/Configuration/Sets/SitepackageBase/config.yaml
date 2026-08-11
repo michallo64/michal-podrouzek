@@ -1,0 +1,5 @@
+name: podrouzek/sitepackage-base
+label: 'Site Package: Base (reusable starter kit)'
+dependencies:
+  - typo3/fluid-styled-content
+  - typo3/seo-sitemap

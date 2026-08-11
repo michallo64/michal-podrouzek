@@ -1,0 +1,4 @@
+name: podrouzek/sitepackage-promo
+label: 'Site Package: Promo (brand layer)'
+dependencies:
+  - podrouzek/sitepackage-base

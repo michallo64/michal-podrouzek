@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-08-11" product-name="promo_showcase">
+        <header/>
+        <body>
+            <trans-unit id="widget.group.promoShowcase" resname="widget.group.promoShowcase">
+                <source>Promo Showcase</source>
+            </trans-unit>
+            <trans-unit id="widget.experienceYears.title" resname="widget.experienceYears.title">
+                <source>Years of TYPO3 experience</source>
+            </trans-unit>
+            <trans-unit id="widget.experienceYears.subtitle" resname="widget.experienceYears.subtitle">
+                <source>Calculated live from the career start milestone</source>
+            </trans-unit>
+            <trans-unit id="widget.experienceYears.description" resname="widget.experienceYears.description">
+                <source>Shows the number of years since the "career_start" milestone in the TCA-driven milestone table.</source>
+            </trans-unit>
+            <trans-unit id="widget.extensionsShipped.title" resname="widget.extensionsShipped.title">
+                <source>Extensions shipped</source>
+            </trans-unit>
+            <trans-unit id="widget.extensionsShipped.subtitle" resname="widget.extensionsShipped.subtitle">
+                <source>Calculated live from the milestone table</source>
+            </trans-unit>
+            <trans-unit id="widget.extensionsShipped.description" resname="widget.extensionsShipped.description">
+                <source>Counts the "extension_shipped" milestones recorded in the milestone table.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

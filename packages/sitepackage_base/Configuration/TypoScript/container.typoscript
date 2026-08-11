@@ -1,0 +1,23 @@
+# b13/container grid presets — see Configuration/TCA/Overrides/tt_content.php
+# for the corresponding CType/colPos registration.
+tt_content.sitepackage-1col < lib.contentElement
+tt_content.sitepackage-1col {
+    templateName = OneColumn
+    templateRootPaths {
+        10 = EXT:sitepackage_base/Resources/Private/Templates/Container/
+    }
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}
+
+tt_content.sitepackage-2col < lib.contentElement
+tt_content.sitepackage-2col {
+    templateName = TwoColumn
+    templateRootPaths {
+        10 = EXT:sitepackage_base/Resources/Private/Templates/Container/
+    }
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}

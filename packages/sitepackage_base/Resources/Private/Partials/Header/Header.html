@@ -1,0 +1,24 @@
+<header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-header__brand" href="/">
+            <f:if condition="{logoPath}">
+                <f:then>
+                    <img class="site-header__logo" src="{f:uri.resource(path: logoPath)}" alt="{siteName}">
+                </f:then>
+                <f:else>
+                    <span class="site-header__name">{siteName}</span>
+                    <span class="site-header__tagline">{siteTagline}</span>
+                </f:else>
+            </f:if>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <ul>
+                <f:for each="{mainnavigation}" as="navPage">
+                    <li class="site-nav__item{f:if(condition: navPage.active, then: ' is-active')}">
+                        <a href="{navPage.link}"{f:if(condition: navPage.active, then: ' aria-current="page"')}>{navPage.title}</a>
+                    </li>
+                </f:for>
+            </ul>
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,23 @@
+{
+	"name": "podrouzek/sitepackage-base",
+	"type": "typo3-cms-extension",
+	"description": "Reusable TYPO3 site package starter kit: TypoScript skeleton, Fluid layout/partials, Content Blocks, and b13/container grid presets. Brand-neutral — carries no hardcoded colors, fonts, or copy. Meant to be lifted into future projects unmodified; brand packages (e.g. sitepackage_promo) supply the CSS custom properties, logo, and site identity constants documented in README.md.",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Michal Podroužek",
+			"email": "podrouzekmichal@gmail.com"
+		}
+	],
+	"require": {
+		"typo3/cms-core": "^13.4",
+		"typo3/cms-fluid-styled-content": "^13.4",
+		"typo3/cms-seo": "^13.4",
+		"b13/container": "^4.0"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "sitepackage_base"
+		}
+	}
+}

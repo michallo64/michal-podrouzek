@@ -1,0 +1,16 @@
+# Brand contract — a brand package (e.g. sitepackage_promo) is expected to
+# override every value below via its own constants.typoscript. The values
+# here are neutral placeholders so this package renders sensibly even if
+# no brand package overrides them yet. See README.md "Brand contract".
+sitepackage {
+    siteName = New TYPO3 Project
+    siteTagline =
+    siteUrl = https://example.com
+    contactEmail =
+    # Optional path to a logo image (e.g. EXT:sitepackage_promo/Resources/Public/Images/logo.svg).
+    # Left empty, the header falls back to rendering siteName as text.
+    logoPath =
+    # Used for the Person/ProfessionalService JSON-LD @type — override with
+    # "Organization" instead of "Person" for a company brand package.
+    schemaPersonType = Person
+}

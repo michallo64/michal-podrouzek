@@ -1,0 +1,12 @@
+# Values for the brand contract declared by sitepackage_base
+# (Configuration/TypoScript/constants.typoscript). This is the only place
+# site identity is set — a future relaunch package overrides these same
+# keys, nothing else needs to change.
+sitepackage {
+    siteName = Michal Podroužek
+    siteTagline = TYPO3 Developer
+    siteUrl = https://www.podrouzek.dev
+    contactEmail = podrouzekmichal@gmail.com
+    logoPath =
+    schemaPersonType = Person
+}

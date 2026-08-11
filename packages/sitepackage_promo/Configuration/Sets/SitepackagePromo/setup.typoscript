@@ -1,0 +1,2 @@
+@import 'EXT:sitepackage_promo/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:sitepackage_promo/Configuration/TypoScript/page.typoscript'

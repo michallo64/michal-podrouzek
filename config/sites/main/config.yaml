@@ -1,0 +1,20 @@
+base: 'https://promo-showcase.ddev.site/'
+dependencies:
+  - podrouzek/sitepackage-promo
+errorHandling: {  }
+routeEnhancers:
+  XmlSitemap:
+    type: PageType
+    map:
+      sitemap.xml: 1533906435
+languages:
+  -
+    title: English
+    enabled: true
+    languageId: 0
+    base: /
+    locale: en_US.UTF-8
+    navigationTitle: English
+    flag: us
+rootPageId: 1
+routes: {  }

@@ -1,0 +1,27 @@
+{
+	"name": "podrouzek/promo-showcase-ext",
+	"type": "typo3-cms-extension",
+	"description": "Small TCA/Extbase-backed TYPO3 extension: a backend dashboard widget that live-calculates years of TYPO3 experience and extensions shipped from a small career-milestone table.",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Michal Podroužek",
+			"email": "podrouzekmichal@gmail.com"
+		}
+	],
+	"require": {
+		"typo3/cms-core": "^13.4",
+		"typo3/cms-extbase": "^13.4",
+		"typo3/cms-dashboard": "^13.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"Podrouzek\\PromoShowcase\\": "Classes/"
+		}
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "promo_showcase"
+		}
+	}
+}
