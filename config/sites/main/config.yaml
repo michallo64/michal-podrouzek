@@ -16,5 +16,15 @@ languages:
     locale: en_US.UTF-8
     navigationTitle: English
     flag: us
+  -
+    title: Slovak
+    enabled: true
+    languageId: 1
+    base: /sk/
+    locale: sk_SK.UTF-8
+    navigationTitle: Slovak
+    flag: sk
+    fallbackType: fallback
+    fallbacks: '0'
 rootPageId: 1
 routes: {  }

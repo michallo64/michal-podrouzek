@@ -83,6 +83,15 @@ page {
                 titleField = nav_title // title
                 as = homenavigation
             }
+
+            # Alternate-language links for the header's language toggle —
+            # each item carries its own translated `link` to the current
+            # page, so switching language never drops the visitor back to
+            # the homepage.
+            30 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+            30 {
+                as = languagemenu
+            }
         }
 
         variables {

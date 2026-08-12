@@ -297,6 +297,10 @@ p {
     }
 }
 
+.site-header__locale a {
+    text-decoration: none;
+}
+
 .site-header__locale-active {
     color: var(--color-primary, #005535);
 }
@@ -307,6 +311,10 @@ p {
 
 .site-header__locale-inactive {
     color: var(--color-secondary, #555f6d);
+}
+
+.site-header__locale-inactive:hover {
+    color: var(--color-primary, #005535);
 }
 
 /* ---------- Buttons ---------- */

@@ -12,20 +12,20 @@
     <form class="form-panel__form">
         <div class="form-panel__row">
             <div class="form-field">
-                <label class="form-label" for="contact-name">IDENTIFIER (NAME)</label>
+                <label class="form-label" for="contact-name"><f:translate key="{cb:languagePath()}:field.name" /></label>
                 <input class="form-input" type="text" id="contact-name" name="name" required="required">
             </div>
             <div class="form-field">
-                <label class="form-label" for="contact-email">COMM_CHANNEL (EMAIL)</label>
+                <label class="form-label" for="contact-email"><f:translate key="{cb:languagePath()}:field.email" /></label>
                 <input class="form-input" type="email" id="contact-email" name="email" required="required">
             </div>
         </div>
         <div class="form-field">
-            <label class="form-label" for="contact-requirements">PROJECT_REQUIREMENTS</label>
+            <label class="form-label" for="contact-requirements"><f:translate key="{cb:languagePath()}:field.requirements" /></label>
             <textarea class="form-textarea" id="contact-requirements" name="requirements" rows="6" required="required"></textarea>
         </div>
         <div class="form-panel__actions">
-            <button class="btn btn-primary" type="submit">EXECUTE_TRANSMISSION</button>
+            <button class="btn btn-primary" type="submit"><f:translate key="{cb:languagePath()}:field.submit" /></button>
         </div>
     </form>
 </div>

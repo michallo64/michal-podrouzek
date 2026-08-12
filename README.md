@@ -11,6 +11,12 @@ every color/type/spacing token as a real CSS custom property and every
 font self-hosted — no Tailwind CDN, no Google Fonts CDN. See
 `docs/BUILD_LOG.md` "Session 4" for the full story.
 
+**Languages**: English (default) and Slovak (`/sk/`), toggled via the
+header's EN // SK switch. Home, Services, Case Studies, and Contact are
+fully translated with graceful English fallback for anything untranslated
+(currently: the About page, which hasn't been rebuilt on the current
+design yet — see `docs/BUILD_LOG.md` "Session 6").
+
 ## Stack
 
 - TYPO3 13.4 LTS, Composer-based install (no classic installer)

@@ -15,9 +15,10 @@
             </f:for>
         </nav>
         <div class="site-header__locale">
-            <span class="site-header__locale-active">EN</span>
-            <span class="site-header__locale-sep">//</span>
-            <span class="site-header__locale-inactive">SK</span>
+            <f:for each="{languagemenu}" as="lang" iteration="i">
+                <f:if condition="{i.isFirst} == false"><span class="site-header__locale-sep">//</span></f:if>
+                <a href="{lang.link}" class="{f:if(condition: lang.active, then: 'site-header__locale-active', else: 'site-header__locale-inactive')}">{lang.twoLetterIsoCode -> f:format.case(mode: 'upper')}</a>
+            </f:for>
         </div>
         <a class="btn btn-primary" href="mailto:{contactEmail}">HIRE_ME</a>
     </div>

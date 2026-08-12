@@ -1,25 +1,23 @@
 <?xml version="1.0"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-12T16:32:21+00:00" product-name="sitepackage/contact-form">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" target-language="sk" product-name="sitepackage/contact-form">
     <header/>
     <body>
-      <trans-unit id="title">
-        <source>Contact Form</source>
-      </trans-unit>
-      <trans-unit id="description">
-        <source>Name/email/requirements contact form, styled to match the site. Presentational only for now — no mail-sending backend wired up yet.</source>
-      </trans-unit>
       <trans-unit id="field.name">
         <source>IDENTIFIER (NAME)</source>
+        <target>IDENTIFIKÁTOR (MENO)</target>
       </trans-unit>
       <trans-unit id="field.email">
         <source>COMM_CHANNEL (EMAIL)</source>
+        <target>KOMUNIKAČNÝ_KANÁL (EMAIL)</target>
       </trans-unit>
       <trans-unit id="field.requirements">
         <source>PROJECT_REQUIREMENTS</source>
+        <target>POŽIADAVKY_NA_PROJEKT</target>
       </trans-unit>
       <trans-unit id="field.submit">
         <source>EXECUTE_TRANSMISSION</source>
+        <target>ODOSLAŤ_POŽIADAVKU</target>
       </trans-unit>
     </body>
   </file>

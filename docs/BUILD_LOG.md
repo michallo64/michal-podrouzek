@@ -644,3 +644,133 @@ Extbase option out of habit.
   reference closely (status badge colors, tags, eyebrow header); Contact
   matches closely (grid-decor form panel, both sidebar card variants,
   arrow-reveal-on-hover on the direct-contact link).
+
+## Session 6: Slovak (SK) language
+
+Goal: use the header's existing (previously decorative) EN // SK toggle
+for real — add Slovak as a second site language and translate the pages
+rebuilt so far.
+
+### Site config
+
+Second language in `config/sites/main/config.yaml`: `languageId: 1`,
+`base: /sk/`, `locale: sk_SK.UTF-8`, `fallbackType: fallback` with
+`fallbacks: '0'` — any untranslated record automatically shows the
+English version rather than a gap in the page. `sk_SK.UTF-8` isn't
+actually installed as a system locale in the DDEV container
+(`locale -a` doesn't list it) but TYPO3 didn't need it installed to
+render `lang="sk-SK"` pages correctly — worth knowing if a future
+session sees locale-dependent formatting (date/number) look off in
+Slovak; that's the one thing that actually needs the real system locale,
+everything else TYPO3 did here does not.
+
+### Language toggle wired up
+
+Was static `<span>EN</span> // <span>SK</span>` markup since Session 4.
+Replaced with TYPO3 core's `LanguageMenuProcessor` (`as = languagemenu`,
+added to the same `dataProcessing` block as the two nav menus in
+`page.typoscript`), which gives each language item its own translated
+`link` to the *current* page — switching language from `/services/`
+correctly goes to `/sk/sluzby/`, not back to the Slovak homepage.
+
+### Container children vs. Collection children — two different rules for translated records
+
+Worked out (and confirmed by reading `FrontendContainerFactory::buildContainer`,
+not guessed) that these are **not** the same pattern, despite both being
+"child records with a parent-pointer column":
+
+- **b13/container children** (`tx_container_parent`): the factory builds
+  the container from `$cObj->data`, which — under TYPO3's default content
+  overlay behavior — always carries the *original* record's `uid` even
+  when rendering the Slovak version (fields are overlaid in place, the
+  `uid` doesn't change). So it queries children with
+  `WHERE tx_container_parent = <original container uid>`. A translated
+  Service Card sitting in a translated container slot must therefore set
+  `tx_container_parent` to the **same value as its English sibling**, not
+  to a new "translated container" record — and the container wrapper row
+  itself (`sitepackage-cardgrid3`, `sitepackage-split84`) never needs a
+  translation at all, since it has no visible text.
+- **Content Blocks Collection children** (`foreign_table_parent_uid`,
+  e.g. `sitepackage_hero_stats`, `sitepackage_servicecard_tech_specs`):
+  ordinary TCA `type=inline` IRRE, not language-overlaid at the child
+  level. A translated parent record starts with **zero** children of its
+  own — its Collection fields must get their own full set of child rows,
+  with `foreign_table_parent_uid` pointing at the **translated** parent's
+  own uid.
+
+Getting this backwards in either direction produces silently-empty
+sections (missing tech specs / stats / tags) rather than an error, so if
+a future translated record's Collection field renders empty, check which
+of these two rules applies before assuming the data is wrong.
+
+One more schema detail worth recording: `tt_content`'s language-parent
+column is `l18n_parent` (legacy naming), not `l10n_parent` — `pages` uses
+`l10n_parent`. Both tables have `l10n_source` (correct modern naming) in
+addition. Mixing these up is a silent no-op insert into a nonexistent
+column, caught immediately by MySQL's "Unknown column" error, not a
+runtime bug — but worth getting right the first time.
+
+### What got translated, and what deliberately didn't
+
+Translated: all page titles/slugs/meta descriptions/SEO titles for all 5
+pages (Home→`/`, Services→`/sluzby/`, Case Studies→`/pripadove-studie/`,
+About→`/o-mne/`, Contact→`/kontakt/`); Home (hero heading, stat strip,
+both bento cards + their tech specs); Services (intro + all 3 cards +
+tech specs); Case Studies (eyebrow header + all 6 cards + tech tags);
+Contact (intro + both sidebar cards' body copy).
+
+**Deliberately kept in English on both languages** — treated as stylized
+"system chrome" that's part of the brand identity itself (matching how
+`TYPO3_DEV_SPEC` the brandmark never translates either), not literal
+content: nav labels (INDEX/SERVICES/REPO/CONTACT), HIRE_ME, footer
+labels (v1.0.0/STK_STATUS/GPG_KEY/LEGAL/SYSTEM_STABLE), status badges
+(STABLE/CRITICAL/ARCHIVED — also avoids needing language-specific CSS
+class mapping, since `badge--{data.status}` keys directly off the stored
+enum value), and the TECH_SPECS / SCALE // METRICS section labels inside
+Service Card and Project Card. If this call turns out wrong, these are
+all single hardcoded strings in their respective Fluid templates or
+fixed TCA `Select` items — easy to find and change, not a structural
+decision baked in anywhere else.
+
+**Contact Form is the one exception that *did* need translating despite
+being template-hardcoded**: unlike the "system chrome" labels above,
+form field labels are functional instructions a real visitor has to
+understand to use the form, so English-only wasn't acceptable there.
+Converted the 4 hardcoded strings to `<f:translate key="{cb:languagePath()}:field.x" />`
+and added `sk.labels.xlf` next to the block's `labels.xlf` — this is the
+correct general pattern for localizing any future Content Block's
+template-hardcoded (non-database) strings, worth reusing rather than
+reinventing per-block.
+
+**About page not translated**: still holds Session 3's old-schema
+placeholder content (not yet rebuilt on the current design at all — see
+Session 4/5 notes). Its page-level fields (title/slug/meta) are
+translated so `/sk/o-mne/` has correct Slovak metadata and a working
+Slovak URL, but the body content falls back to English via
+`fallbackType: fallback` — confirmed this renders as a clean degradation
+(translated `<title>`, English `<h1>`/body), not broken output. Translate
+its content the same session About itself gets rebuilt on the new
+design, not before.
+
+### Verification performed
+
+- Curled `/sk/`, `/sk/sluzby/`, `/sk/pripadove-studie/`, `/sk/o-mne/`,
+  `/sk/kontakt/`, and `/sitemap.xml` — all 200.
+- `content-blocks:lint` — clean.
+- Grepped all 4 fully-translated SK pages for CDN references — none
+  (font/token work from Session 4 is language-independent, as expected,
+  but worth re-checking after adding a language since it's a plausible
+  place for a regression).
+- Confirmed the language toggle's `href` via curl on both `/` and
+  `/services/` — points to `/sk/` and `/sk/sluzby/` respectively (not a
+  flat "always go to Slovak homepage" link), and that `active`/`inactive`
+  CSS classes swap correctly depending on which language is current.
+- Screenshotted all 4 translated pages in-browser — Home, Services, Case
+  Studies, Contact all render fully in Slovak with correct nav
+  highlighting, correct status badge colors, correct XLIFF-driven form
+  labels, no layout breakage from longer Slovak text strings (diacritics
+  render correctly — confirms the `latin-ext` font subsetting from
+  Session 4 was the right call, not just theoretical).
+- Curled `/sk/o-mne/` specifically to confirm the fallback degrades
+  cleanly (translated title, English body) rather than erroring or
+  showing a blank page.
