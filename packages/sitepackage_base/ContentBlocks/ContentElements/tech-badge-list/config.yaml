@@ -5,10 +5,10 @@ prefixFields: true
 prefixType: full
 fields:
   -
-    identifier: groups
+    identifier: badges
     type: Collection
-    label: 'Groups (e.g. ENV.CORE, ENV.FRONTEND, ENV.TOOLS, ENV.INTEGRATION)'
-    labelField: group_label
+    label: 'Badges — keep rows in the same group adjacent, rendering groups them by "Group label" in order of appearance'
+    labelField: label
     minitems: 1
     fields:
       -
@@ -17,14 +17,7 @@ fields:
         label: 'Group label'
         placeholder: 'e.g. ENV.CORE'
       -
-        identifier: badges
-        type: Collection
-        label: Badges
-        labelField: label
-        minitems: 1
-        fields:
-          -
-            identifier: label
-            type: Text
-            label: Badge
-            placeholder: 'e.g. TYPO3 v13, PHP 8.x'
+        identifier: label
+        type: Text
+        label: Badge
+        placeholder: 'e.g. TYPO3 v13, PHP 8.x'

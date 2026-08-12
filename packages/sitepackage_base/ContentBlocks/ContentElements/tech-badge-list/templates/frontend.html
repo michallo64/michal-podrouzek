@@ -3,18 +3,22 @@
     xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-<div class="ce-tech-badge-list">
-    <f:for each="{data.groups}" as="group">
+<div class="ce-panel ce-tech-badge-list">
+    <div class="ce-panel__header">
+        <span class="material-symbols-outlined">data_object</span>
+        <h2 class="text-headline-card">TECH_REGISTRY</h2>
+    </div>
+    <f:groupedFor each="{data.badges}" as="badgesInGroup" groupBy="group_label" groupKey="groupLabel">
         <div class="ce-tech-badge-list__group">
-            <f:if condition="{group.group_label}">
-                <h4 class="text-label-mono ce-tech-badge-list__group-label">{group.group_label}</h4>
+            <f:if condition="{groupLabel}">
+                <h4 class="text-label-mono ce-tech-badge-list__group-label">{groupLabel}</h4>
             </f:if>
             <ul class="ce-tech-badge-list__badges">
-                <f:for each="{group.badges}" as="badge">
+                <f:for each="{badgesInGroup}" as="badge">
                     <li class="ce-tech-badge-list__badge text-label-tiny">{badge.label}</li>
                 </f:for>
             </ul>
         </div>
-    </f:for>
+    </f:groupedFor>
 </div>
 </html>

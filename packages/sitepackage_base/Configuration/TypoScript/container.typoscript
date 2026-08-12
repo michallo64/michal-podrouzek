@@ -43,3 +43,14 @@ tt_content.sitepackage-split84 {
         100 = B13\Container\DataProcessing\ContainerProcessor
     }
 }
+
+tt_content.sitepackage-split48 < lib.contentElement
+tt_content.sitepackage-split48 {
+    templateName = Split48
+    templateRootPaths {
+        10 = EXT:sitepackage_base/Resources/Private/Templates/Container/
+    }
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}

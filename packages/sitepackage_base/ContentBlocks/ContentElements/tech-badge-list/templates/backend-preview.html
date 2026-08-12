@@ -11,9 +11,7 @@
 </f:section>
 
 <f:section name="Content">
-    <f:for each="{data.groups}" as="group" iteration="i">
-        <f:if condition="{i.isFirst} == false"> | </f:if>{group.group_label} (<f:for each="{group.badges}" as="badge" iteration="j"><f:if condition="{j.isFirst} == false">, </f:if>{badge.label}</f:for>)
-    </f:for>
+    <f:groupedFor each="{data.badges}" as="badgesInGroup" groupBy="group_label" groupKey="groupLabel">{groupLabel} (<f:for each="{badgesInGroup}" as="badge" iteration="j"><f:if condition="{j.isFirst} == false">, </f:if>{badge.label}</f:for>) </f:groupedFor>
 </f:section>
 
 </html>

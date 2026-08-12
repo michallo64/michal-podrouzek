@@ -177,9 +177,8 @@ p {
     }
 }
 
-/* 8/4 asymmetric split — bento teaser on Home, form/sidebar on Contact,
-   sidebar/timeline on About. Registered as the "sitepackage-split84"
-   b13/container preset. */
+/* 8/4 asymmetric split — bento teaser on Home, form/sidebar on Contact.
+   Registered as the "sitepackage-split84" b13/container preset. */
 .grid-split-8-4 {
     display: grid;
     grid-template-columns: 1fr;
@@ -204,14 +203,16 @@ p {
     }
 }
 
-.grid-split-8-4--mirrored {
+/* Mirrored 4/8 — sidebar/timeline on About. Registered as the
+   "sitepackage-split48" b13/container preset. */
+.grid-split-4-8 {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-lg, 2rem);
 }
 
 @media (min-width: 64rem) {
-    .grid-split-8-4--mirrored {
+    .grid-split-4-8 {
         grid-template-columns: 1fr 2fr;
     }
 }
@@ -413,6 +414,55 @@ p {
     letter-spacing: 0.05em;
     color: var(--color-secondary, #555f6d);
     margin-bottom: var(--space-xs, 0.5rem);
+}
+
+/* Plain bordered page header — title + optional identity/meta line
+   underneath (e.g. About's "IDENTITY: ..." row). */
+.page-header {
+    margin-bottom: var(--space-xl, 4rem);
+    padding-bottom: var(--space-md, 1.5rem);
+    border-bottom: 1px solid var(--color-outline-variant, #bfc9c0);
+}
+
+.page-header h1 {
+    margin-bottom: var(--space-xs, 0.5rem);
+}
+
+.identity-line {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs, 0.5rem);
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-label-mono-size, 14px);
+    color: var(--color-secondary, #555f6d);
+    margin: 0;
+}
+
+.identity-line .material-symbols-outlined {
+    font-size: 16px;
+}
+
+/* Icon + title row above a run of content elements, e.g. About's
+   "TIMELINE_LOG" heading above its stacked Timeline Entry blocks.
+   Lighter than .ce-panel__header — no surrounding bordered box, since
+   the entries below aren't Collection children of a single record and
+   boxing them would mean splitting a wrapper div's HTML across several
+   separate tt_content elements (fragile — see docs/BUILD_LOG.md). */
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm, 0.75rem);
+    margin-bottom: var(--space-lg, 2rem);
+    padding-bottom: var(--space-sm, 0.75rem);
+    border-bottom: 1px solid var(--color-outline-variant, #bfc9c0);
+}
+
+.section-heading .material-symbols-outlined {
+    color: var(--color-primary, #005535);
+}
+
+.section-heading h2 {
+    margin: 0;
 }
 
 .tag {

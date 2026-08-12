@@ -774,3 +774,136 @@ design, not before.
 - Curled `/sk/o-mne/` specifically to confirm the fallback degrades
   cleanly (translated title, English body) rather than erroring or
   showing a blank page.
+
+## Session 7: About/CV page rebuilt on the current design
+
+Goal: replace the Session 3 placeholder About page with the confirmed
+`system_about_cv_updated` design — page header, a two-column
+sidebar+timeline layout, Core Identity + Tech Registry cards on the
+left, a Timeline on the right — then translate it to Slovak like every
+other rebuilt page.
+
+Two fields the design brief explicitly flagged as "pending confirmation"
+were resolved before building: the identity-line role label is
+**TYPO3_DEVELOPER** (not the mockup's SENIOR_SYSTEMS_ARCHITECT), and the
+identity photo is **skipped** — no real photo asset exists in the repo,
+and a placeholder graphic would be worse than no photo on a site whose
+whole pitch is production-quality work.
+
+### Layout
+
+New mirrored container preset, `sitepackage-split48` (narrow 4-col slot
+first, wide 8-col slot second — colPos 250/251), registered the same way
+as the existing `sitepackage-split84`. The header above the two columns
+is a plain `text` CType (a raw `.page-header` div with the H1 and a
+fingerprint-icon identity line) rather than a content block, since it's
+a one-off for this page. The Timeline section deliberately does **not**
+get a full `.ce-panel` bordered box like the mockup shows: boxing it
+would mean opening a wrapper `<div>` in one tt_content element (a
+section-heading text block) and closing it after N independent Timeline
+Entry elements — fragile, and breaks the moment an editor reorders or
+deletes an entry. Used a lighter `.section-heading` treatment instead
+(icon + title + bottom border, no box) — a deliberate fidelity trade for
+structural robustness, consistent with how this project has handled
+similar cases before (see the Session 5 Contact page notes).
+
+### Bug: nested Collection-in-Collection didn't resolve in Fluid
+
+The Tech Registry card's original schema was a Collection of groups
+(`ENV.CORE`, `ENV.FRONTEND`, ...), each holding its own nested
+Collection of badges — mirroring the visual structure directly. This
+rendered every group's badge list as empty. A debug comment
+(`{group.badges}`) showed the literal stored integer count (`4`, `4`,
+`5`, `4`) instead of a resolved array, even though the underlying rows
+and foreign keys were correct (verified via direct SQL).
+
+Traced this through Content Blocks' relation-resolution path
+(`ContentBlockDataDecorator::loadField`/`transformSingleRelation`, which
+wraps relation fields in a `TYPO3\CMS\Core\Domain\RecordPropertyClosure`
+lazily instantiated on `ContentBlockData::get()`) — on paper this looks
+fully recursive, and Content Blocks' own docs claim relations resolve
+"recursively." Whether the actual failure is in TYPO3 core's
+`@internal` Record API not building a closure for the second nesting
+level, or something else in that path, wasn't conclusively pinned down —
+digging further into `@internal` core internals for a two-levels-deep
+edge case had a poor time/payoff ratio.
+
+Fixed pragmatically instead by flattening the schema: `groups` (outer
+Collection) → `badges` (single Collection) is gone; `badges` is now one
+flat Collection directly on the content element, with each row carrying
+both `group_label` and `label`. The frontend template groups them for
+display with the stock `<f:groupedFor each="{data.badges}" as
+="badgesInGroup" groupBy="group_label" groupKey="groupLabel">` —
+avoiding nested Collections entirely rather than working around their
+resolution bug. This is arguably a cleaner data model regardless (no
+special-casing a "collection of collections" case), and confirmed
+working: all 17 badges across 4 groups render correctly, in order,
+inside a `.ce-panel` (icon `data_object` + "TECH_REGISTRY", matching
+Core Identity's treatment).
+
+One follow-on mistake caught during verification: the backend preview
+template originally used `<f:groupedFor ... iteration="i">` to detect
+the first group for a `" | "` separator — `f:groupedFor` doesn't declare
+an `iteration` argument (unlike plain `f:for`), so this threw
+`TYPO3Fluid\...\Exception` (#1773227091, "undeclared arguments") in the
+Page module's backend preview. Fixed by dropping the separator logic in
+favor of a trailing space after each group (cosmetic, backend-editor-only
+text, not worth the complexity).
+
+Migrating existing DB content for this schema change meant hand-writing
+SQL (delete the old group + badge child rows, insert flat replacement
+rows with `foreign_table_parent_uid` pointing straight at the tt_content
+row) since there's no content yet to lose in a "real" migration — this
+was still local placeholder data. `extension:setup`'s schema sync is
+additive-only (documented already in Session 4/5): it left the old
+`sitepackage_techbadgelist_groups` table and two now-unused tt_content
+columns behind after the schema changed. Confirmed all were empty/unused
+post-migration and dropped them by hand (`DROP COLUMN` ×2, `DROP TABLE`)
+rather than leaving orphaned schema in a portfolio piece meant to be
+read.
+
+### Slovak translation
+
+Same page structure as every other language pair on this site: the
+container itself (`sitepackage-split48`, uid 83) has no translated copy
+— container children are found purely by `tx_container_parent` +
+`colPos`, independent of the container row's own language, matching how
+`sitepackage-cardgrid3` already worked. Every child content element gets
+a real translated row (`l18n_parent`/`l10n_source` pointing at the
+English original, `tx_container_parent` unchanged at the original
+container's uid). The Tech Badge List's flat Collection children are a
+fully independent set of rows per language, `foreign_table_parent_uid`
+pointing at that language's own tt_content uid — same rule documented in
+Session 6 for `sitepackage_projectcard_tech_tags`.
+
+Translated: Core Identity's `WHAT_I_DO` sentence and `ACADEMIC_SYS`
+lines (dropped the English `(MSc)`/`(BSc)` parentheticals from the SK
+version since `Ing.`/`Bc.` are already the correct Slovak abbreviations),
+and all 4 Timeline entries (role title, description; company names
+stay as-is — proper nouns).
+
+**Kept in English on the SK page**, consistent with the Session 6 rule
+for spec-style chrome: the page header's `CURRICULUM_VITAE` / `IDENTITY:`
+/ `TYPO3_DEVELOPER` / `MAJOR_UPGRADES` tokens (confirmed the precedent
+still holds — the Services page's own SK `header` field literally stores
+the English string `SYSTEM_SERVICES`, not a translation), the
+`TIMELINE_LOG` section heading, and both the Tech Registry's group
+labels (`ENV.CORE` etc.) and badge names (`TYPO3 v11/v12/v13`, `PHP
+8.x`, ...) — these are product/tech names, not prose, matching how
+Project Card's `tech_tags` stayed untranslated in Session 6. Date ranges
+(`2021 - PRESENT`) also kept as-is for the same reason.
+
+### Verification performed
+
+- Curled `/about/` and `/sk/o-mne/` — both 200, zero PHP fatal
+  errors/exceptions in either, all 17 badges present across 4 groups in
+  the correct order on both.
+- `content-blocks:lint` — clean.
+- Grepped both pages for CDN references — none.
+- Backend Page module screenshot on `/about/` (pid 4) confirmed no error
+  boxes in any content element preview, including the fixed Tech Badge
+  List preview.
+- Browser screenshots of both `/about/` and `/sk/o-mne/`, full page —
+  header, two-column layout, Core Identity, Tech Registry (all 4 groups
+  with correct badges), and Timeline (4 entries, current-role node
+  styled distinctly) all match the confirmed design, no console errors.

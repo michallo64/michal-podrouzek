@@ -63,8 +63,7 @@ call_user_func(static function (): void {
 
     // Asymmetric 8/4 split (see base.css .grid-split-8-4). Wide slot first,
     // narrow slot second — matches the Home bento teaser and the Contact
-    // form/sidebar layout. A mirrored 4/8 variant is not registered yet;
-    // add "sitepackage-split48" the same way if a future page needs it.
+    // form/sidebar layout.
     $registry->configureContainer(
         (new \B13\Container\Tca\ContainerConfiguration(
             'sitepackage-split84',
@@ -77,5 +76,21 @@ call_user_func(static function (): void {
                 ],
             ]
         ))->setIcon('container-2col-left')
+    );
+
+    // Mirrored: narrow slot first, wide slot second (see base.css
+    // .grid-split-4-8). Used for the About page's sidebar+timeline layout.
+    $registry->configureContainer(
+        (new \B13\Container\Tca\ContainerConfiguration(
+            'sitepackage-split48',
+            'Split 4/8',
+            'An asymmetric two-column layout: a narrow 4-column slot and a wide 8-column slot.',
+            [
+                [
+                    ['name' => 'Narrow (4 col)', 'colPos' => 250],
+                    ['name' => 'Wide (8 col)', 'colPos' => 251],
+                ],
+            ]
+        ))->setIcon('container-2col-right')
     );
 });
