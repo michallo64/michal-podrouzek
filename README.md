@@ -78,11 +78,14 @@ DI quirks) — read it before continuing work on this repo.
 
 ## Known placeholders / follow-ups
 
-- Contact page has a plain mailto link; a real form (Powermail or a
-  lightweight custom one) is a follow-up.
-- Case studies, About, and Services copy is placeholder text per the
-  project brief — no real client data is or will be used (see
-  `CLAUDE.md` constraints).
+- Contact page has a fully styled form (name/email/requirements) but no
+  submit handler yet — presentational only. A real backend (Extbase mail
+  form, or a lightweight custom one) is a follow-up.
+- About page still holds Session 3's old-schema placeholder content
+  (Case Studies, Services, Home, and Contact are all rebuilt on the
+  current design as of `docs/BUILD_LOG.md` Session 5).
+- Case studies are anonymized project write-ups per the project brief —
+  no real client data is or will be used (see `CLAUDE.md` constraints).
 - `config/sites/main/config.yaml` still points at the DDEV local URL; swap
   `base` for the real domain before deploying.
 

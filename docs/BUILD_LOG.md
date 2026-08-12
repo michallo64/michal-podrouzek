@@ -558,3 +558,89 @@ staying highlighted on unrelated pages, check for this exact
   (fonts, colors, PCB trace with correct active v13 node, stat strip,
   TECH_SPECS boxes, 3-col and 8/4 grids all correct); Case Studies/About
   confirmed *not broken* with old-schema content, as expected.
+
+## Session 5: Case Studies + Contact rebuilt
+
+Goal: finish the two pages Session 4 deferred, using the same content
+blocks and design tokens.
+
+### Case Studies
+
+Rebuilt with the real 6 case studies from
+`logs_case_studies_updated_code.html` (not the 3 anonymized placeholders
+from Session 1/3) in the existing `sitepackage-cardgrid3` container, each
+a Project Card with `status`, `scale`, and `tech_tags` populated. Added
+one new CSS pattern, `.eyebrow-log` (left-accent border + mono uppercase
+label), for the page's `[SYS_LOG: CASE_STUDIES // ANONYMIZED]` header
+treatment — implemented as a single `text` CType with hand-written HTML
+(`<div class="eyebrow-log">...`), not a new content block, since it's a
+one-off page-header pattern, not repeated content.
+
+One deliberate normalization vs. the source: card 4 ("Backend Dashboard
+Search Widget") is styled `STABLE` but rendered in *secondary/gray*
+Tailwind classes in the exported HTML, not green — inconsistent with
+every other `STABLE` card and with DESIGN.md's own Status Indicators spec
+(which says status badges are always `primary_color`). Treated as a
+one-off mistake in the Stitch export and normalized to the same green
+`STABLE` styling as the other four, rather than reproducing the
+inconsistency. If this was actually intentional in the source, flag it
+and it can be reverted to a status-independent color.
+
+### Contact
+
+Rebuilt with the `sitepackage-split84` container: wide slot holds the
+name/email/requirements form, narrow slot holds two Contact Sidebar Cards
+(`DIRECT_LINK`, a `mailto:` link to the real project email — the source
+mockup used a fake `admin@typo3devspec.local` address, swapped for
+`podrouzekmichal@gmail.com` to match every other contact point on the
+site; and `GPG_KEY_PUB`, a mono code block). The mockup's PCB-trace
+divider graphic at the page bottom was skipped — decorative, not load-
+bearing, same call as the hairline-grid texture deferral in Session 4.
+
+**Real bug, not a design-fidelity issue**: the form was first built as
+raw HTML inside a `text` CType's `bodytext` field (same pattern that
+worked fine for the Case Studies eyebrow header). It rendered as visibly
+escaped text (`&lt;input ...&gt;`) instead of an actual form. Root cause:
+`bodytext` is RTE-oriented content and passes through TYPO3's parseFunc
+HTML sanitizer, which only lets a curated tag allowlist through
+unescaped (paragraphs, headings, basic inline markup, lists, links) —
+`<form>`, `<input>`, `<textarea>`, `<label>`, `<button>` are not on it,
+so they got HTML-entity-encoded instead of stripped (safer default, but
+not what a raw-HTML field editor expects). **Fix**: moved the form into
+its own Content Block (`sitepackage-contactform`, effectively zero
+custom fields — reuses `header` for backend organization only, nothing
+about the form itself is field-driven since the labels are stylized
+system text, not editorial copy). Fluid templates aren't subject to this
+sanitizer — they render exactly what the `.html` file says. **Rule of
+thumb going forward**: raw HTML in a `text` CType's `bodytext` is fine
+for basic prose-adjacent markup, but reach for a Content Block the moment
+you need a genuinely non-prose tag (form elements, tables with custom
+attributes, embeds, etc.) — don't debug why bodytext "ate" your tags,
+just move it to a template.
+
+The form itself is **presentational only** — no submit handler, no mail
+sending. This matches what `README.md` already documented as a known
+follow-up before this session, so it's not a new gap, just now visually
+real instead of a placeholder mailto line. Documented directly in the
+Content Block's own template as an `<f:comment>` (first attempt used
+`{f:comment()}` — invalid Fluid syntax, rendered as literal visible text
+in the page; `<f:comment>...</f:comment>` paired tags are correct). Next
+step if/when this becomes a priority: either a real Extbase
+form-processing controller (this project already has Mailpit configured
+via DDEV for local mail testing, so the plumbing to test against is
+there) or a lightweight vanilla PHP mail-send eID/middleware — worth a
+deliberate choice next session rather than defaulting to the heavier
+Extbase option out of habit.
+
+### Verification performed
+
+- `content-blocks:lint` — clean.
+- Curled all 5 pages + sitemap.xml + robots.txt — all 200.
+- Grepped both rebuilt pages for CDN references — none.
+- Backend Page module on Contact — confirmed the Split 8/4 container
+  shows Contact Form (wide) and both Contact Sidebar Cards (narrow)
+  nested correctly, no PHP warnings.
+- Screenshotted both pages in-browser — Case Studies matches the
+  reference closely (status badge colors, tags, eyebrow header); Contact
+  matches closely (grid-decor form panel, both sidebar card variants,
+  arrow-reveal-on-hover on the direct-contact link).

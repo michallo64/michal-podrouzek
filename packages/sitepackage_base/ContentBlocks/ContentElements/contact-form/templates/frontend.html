@@ -1,0 +1,32 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<div class="form-panel">
+    <f:comment>
+        Presentational only — no submit handler wired up yet.
+        See docs/BUILD_LOG.md "Session 5" for the plan (Extbase mail form
+        vs. a lightweight custom one).
+    </f:comment>
+    <form class="form-panel__form">
+        <div class="form-panel__row">
+            <div class="form-field">
+                <label class="form-label" for="contact-name">IDENTIFIER (NAME)</label>
+                <input class="form-input" type="text" id="contact-name" name="name" required="required">
+            </div>
+            <div class="form-field">
+                <label class="form-label" for="contact-email">COMM_CHANNEL (EMAIL)</label>
+                <input class="form-input" type="email" id="contact-email" name="email" required="required">
+            </div>
+        </div>
+        <div class="form-field">
+            <label class="form-label" for="contact-requirements">PROJECT_REQUIREMENTS</label>
+            <textarea class="form-textarea" id="contact-requirements" name="requirements" rows="6" required="required"></textarea>
+        </div>
+        <div class="form-panel__actions">
+            <button class="btn btn-primary" type="submit">EXECUTE_TRANSMISSION</button>
+        </div>
+    </form>
+</div>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-12T16:32:21+00:00" product-name="sitepackage/contact-form">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Contact Form</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>Name/email/requirements contact form, styled to match the site. Presentational only for now — no mail-sending backend wired up yet.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
