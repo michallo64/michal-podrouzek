@@ -7,6 +7,10 @@ sitepackage {
     siteTagline =
     siteUrl = https://example.com
     contactEmail =
+    # Short codename shown in the header/footer wordmark — distinct from
+    # siteName, which is used for <title>/meta/JSON-LD (a real name reads
+    # better there than a stylized brand codename).
+    brandmark = SITE
     # Optional path to a logo image (e.g. EXT:sitepackage_promo/Resources/Public/Images/logo.svg).
     # Left empty, the header falls back to rendering siteName as text.
     logoPath =

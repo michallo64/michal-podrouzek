@@ -7,6 +7,7 @@ sitepackage {
     siteTagline = TYPO3 Developer
     siteUrl = https://www.podrouzek.dev
     contactEmail = podrouzekmichal@gmail.com
+    brandmark = TYPO3_DEV_SPEC
     logoPath =
     schemaPersonType = Person
 }

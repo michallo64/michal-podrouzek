@@ -3,19 +3,28 @@
     xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-<article class="ce-project-card">
-    <h3 class="ce-project-card__title">{data.header}</h3>
-    <f:if condition="{data.project_type}">
-        <p class="ce-project-card__meta">{data.project_type}</p>
-    </f:if>
+<article class="card ce-project-card">
+    <div class="ce-project-card__header">
+        <h3 class="text-headline-card ce-project-card__title">{data.header}</h3>
+        <f:if condition="{data.status}">
+            <span class="badge badge--{data.status} text-label-tiny">{data.status -> f:format.case(mode: 'upper')}</span>
+        </f:if>
+    </div>
     <f:if condition="{data.description}">
         <p class="ce-project-card__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
     </f:if>
-    <f:if condition="{data.tech_stack}">
-        <p class="ce-project-card__tech">{data.tech_stack}</p>
-    </f:if>
     <f:if condition="{data.scale}">
-        <p class="ce-project-card__scale">{data.scale}</p>
+        <div>
+            <p class="text-label-tiny ce-project-card__scale-label">SCALE // METRICS</p>
+            <p class="ce-project-card__scale-value text-label-mono">{data.scale}</p>
+        </div>
+    </f:if>
+    <f:if condition="{data.tech_tags}">
+        <div class="ce-project-card__tags">
+            <f:for each="{data.tech_tags}" as="tag">
+                <span class="tag">{tag.text}</span>
+            </f:for>
+        </div>
     </f:if>
 </article>
 </html>

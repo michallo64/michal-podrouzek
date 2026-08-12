@@ -2,23 +2,23 @@
     <div class="site-header__inner">
         <a class="site-header__brand" href="/">
             <f:if condition="{logoPath}">
-                <f:then>
-                    <img class="site-header__logo" src="{f:uri.resource(path: logoPath)}" alt="{siteName}">
-                </f:then>
-                <f:else>
-                    <span class="site-header__name">{siteName}</span>
-                    <span class="site-header__tagline">{siteTagline}</span>
-                </f:else>
+                <f:then><img class="site-header__logo" src="{f:uri.resource(path: logoPath)}" alt="{siteName}"></f:then>
+                <f:else>{brandmark}</f:else>
             </f:if>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-            <ul>
-                <f:for each="{mainnavigation}" as="navPage">
-                    <li class="site-nav__item{f:if(condition: navPage.active, then: ' is-active')}">
-                        <a href="{navPage.link}"{f:if(condition: navPage.active, then: ' aria-current="page"')}>{navPage.title}</a>
-                    </li>
-                </f:for>
-            </ul>
+            <f:for each="{homenavigation}" as="navPage">
+                <a href="{navPage.link}"{f:if(condition: navPage.current, then: ' aria-current="page"')}>{navPage.title}</a>
+            </f:for>
+            <f:for each="{mainnavigation}" as="navPage">
+                <a href="{navPage.link}"{f:if(condition: navPage.current, then: ' aria-current="page"')}>{navPage.title}</a>
+            </f:for>
         </nav>
+        <div class="site-header__locale">
+            <span class="site-header__locale-active">EN</span>
+            <span class="site-header__locale-sep">//</span>
+            <span class="site-header__locale-inactive">SK</span>
+        </div>
+        <a class="btn btn-primary" href="mailto:{contactEmail}">HIRE_ME</a>
     </div>
 </header>

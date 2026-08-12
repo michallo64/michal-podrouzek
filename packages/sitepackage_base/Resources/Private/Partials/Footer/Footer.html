@@ -1,6 +1,14 @@
 <footer class="site-footer">
     <div class="site-footer__inner">
-        <p>&copy; <f:format.date date="now" format="Y" /> {siteName}. Built on TYPO3.</p>
-        <p><a href="mailto:{contactEmail}">{contactEmail}</a></p>
+        <div class="site-footer__top">
+            <span class="site-footer__wordmark">{brandmark}</span>
+            <span class="site-footer__status">&copy; <f:format.date date="now" format="Y" /> {brandmark}. SYSTEM_STABLE</span>
+        </div>
+        <div class="site-footer__links">
+            <a href="#">v1.0.0</a>
+            <a href="#">STK_STATUS</a>
+            <a href="#">GPG_KEY</a>
+            <a href="#">LEGAL</a>
+        </div>
     </div>
 </footer>

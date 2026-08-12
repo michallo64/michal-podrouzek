@@ -325,3 +325,236 @@ above.
   visibly 3 columns at desktop width, brand orange accent applied
   correctly throughout (proof the base/brand split from Session 2 still
   works end to end with real content on top of it).
+
+## Session 4: TYPO3_DEV_SPEC design (Stitch export) wired in
+
+Goal: replace the Session 1 placeholder styling with the confirmed
+"clinical spec-sheet" design (`stitch_typo3_engineering_systems/`),
+without shipping the Tailwind CDN script or Google Fonts CDN the export
+used for its own preview convenience. Source of truth was
+`technical_specification/DESIGN.md` (full token frontmatter) plus the 5
+screens' `*_code.html` files — **not** the `*_screen.png` files, two of
+which (`contact_request_proposal`, `system_about_cv_updated`) are broken
+stub files ("Image failed to fetch" saved as .png — `file` reports them
+as ASCII text, not PNG). The other three screenshots are valid and were
+used for visual cross-checking. If a future session needs the About/CV or
+Contact screenshots, they'll need to be re-exported from Stitch — don't
+assume the files in this folder are usable images without checking `file`
+on them first.
+
+### Self-hosted fonts
+
+Pulled the actual `@font-face` rules from Google Fonts' `css2` endpoint
+(with a desktop Chrome UA, so it returns woff2 not woff/ttf), kept only
+the `latin` + `latin-ext` subsets (covers English and Slovak/Czech
+diacritics — dropped cyrillic/greek/vietnamese), and downloaded the woff2
+files directly into
+`packages/sitepackage_promo/Resources/Public/Fonts/`. IBM Plex Sans and
+Inter both turned out to be served as **variable fonts** by Google even
+though we requested discrete weights (400/600/700 all resolve to the same
+physical file per subset) — that's correct/intentional on Google's side:
+a single `@font-face` per weight, all pointing at the same variable file,
+still renders at the declared weight because browsers select that point
+on the font's own `wght` axis. IBM Plex Mono is not variable — genuinely
+separate files per weight (400/500/600/700 × 2 subsets = 8 files).
+
+Material Symbols Outlined is a ~712KB variable icon font unsubset. Used
+`fonttools`/`pyftsubset` (`pip3 install fonttools brotli`, not preinstalled)
+with `--text="<curated icon list>" --layout-features='*'` to cut it to
+~447KB (curated list: upgrade, api, history_edu, payments, speed,
+accessibility_new, hub, integration_instructions, security, arrow_forward,
+mail, psychology, data_object, history, fingerprint — union of every icon
+used across Home/Services/Contact/About templates plus a few extra
+Service Card select options for headroom). The reduction is smaller than
+hoped (37%) because ligature-based icon fonts keep most of their GSUB
+substitution chain even when subsetting to a handful of ligature strings —
+this is a known limitation of subsetting ligature-driven icon fonts, not
+a mistake in the subsetting command. Still strictly better than the
+unsubset 712KB or a third-party CDN request.
+
+All `@font-face` declarations live in
+`packages/sitepackage_promo/Resources/Public/Css/fonts.css` (brand-owned,
+since font choice is a brand decision, same reasoning as the original
+`--font-sans` brand-contract property from Session 2) — loaded via
+`page.includeCSS` in promo's `setup.typoscript`, before `brand.css` in
+the same file so both concatenate in that order.
+
+### Token system
+
+`sitepackage_promo/Resources/Public/Css/brand.css` now carries the full
+DESIGN.md frontmatter as CSS custom properties — every color role
+(`--color-*`, ~40 of them, Material-3-style naming), the three-tier type
+scale (`--text-*`, one set of size/weight/line-height/tracking per named
+style), spacing (`--space-*`), and `--radius-sharp: 0px` (this design has
+no rounded corners anywhere — DESIGN.md's "Shapes" section mentions tags
+*could* optionally use a pill radius, but the shipped reference HTML
+forces `border-radius: 0 !important` on every element, so sharp corners
+everywhere is what was actually built, not the "optional pill" aside).
+
+One extra token beyond DESIGN.md: `--color-border-hairline` (`#e3e6eb`).
+DESIGN.md's own "Application Note" specifies this exact value for
+structural dividers, but it's *different* from `colors.outline-variant`
+(`#bfc9c0`) in the same frontmatter — the actual HTML confirms both are
+real, distinct values used for different things (`outline-variant` for
+real component borders, the hairline value only for the decorative grid
+texture / form background grid). Don't merge these into one token if you
+touch this later — they're intentionally different.
+
+`sitepackage_base/Resources/Public/Css/base.css` was fully rewritten
+(structure only, every value a `var(--x, neutral-fallback)`) rather than
+duplicating a parallel neutral `:root` block for 40+ properties — literal
+fallbacks live inline at each `var()` call instead. Also added generic
+`h1`/`h2`/`h3`/`p` defaults so core content elements (e.g. the plain
+"Header" CType used for page titles) pick up the type system without
+needing a `.text-*` utility class by hand.
+
+### Content Blocks extended (all in sitepackage_base, schema changes are additive)
+
+- **Hero**: added `version_nodes` (Collection: label + active-checkbox,
+  drives the PCB-trace upgrade-path graphic) and `stats` (Collection,
+  max 4, rendered "//"-separated) fields; CTA now has an arrow icon.
+- **Service Card**: `icon` Select values changed from the old abstract
+  keys (upgrade/extension/payment/...) to real Material Symbols names;
+  added `tech_specs` Collection (bulleted "> item" box).
+- **Project Card**: added `status` Select (stable/critical/archived,
+  colored per DESIGN.md's Status Indicators component) and `tech_tags`
+  Collection (pill tags). **Dropped** the `project_type` field and the
+  old free-text `tech_stack` field — the confirmed design's cards don't
+  have a project-type/industry slot at all, and tags replace the comma
+  list. Old columns (`sitepackage_projectcard_project_type`,
+  `_tech_stack`) are still in the DB (Content Blocks schema migration is
+  additive-only, same as core TYPO3) but nothing reads them anymore.
+- **Tech Badge List**: reshaped from flat (`group_label` + one `badges`
+  Collection) to nested (`groups` Collection, each with its own
+  `group_label` + nested `badges` Collection) — needed for the About page
+  design's 4 named groups (ENV.CORE/FRONTEND/TOOLS/INTEGRATION). Verified
+  the nested-Collection schema generates correctly:
+  `sitepackage_techbadgelist_groups.badges` is a count field, and
+  `sitepackage_techbadgelist_badges.foreign_table_parent_uid` points at
+  the *group* row's uid, not the parent tt_content row. Old flat-schema
+  content (Session 3's Services/About tech badge lists) now renders empty
+  (`data.groups` doesn't exist on old records) — expected, not a bug;
+  those pages get rebuilt from the new schema when they're next touched.
+- **Timeline Entry**: added `location` (Text) and `is_current` (Checkbox,
+  drives filled-vs-outline node + bold-vs-secondary date color). Node
+  shape confirmed square with a 2px border (not circular) per the actual
+  export, contradicting nothing — original brief text didn't specify
+  shape, this session's brief explicitly called it out. **Redesigned the
+  connecting line**: each entry draws its own line segment
+  (`.ce-timeline-entry::before`, full height of that entry) instead of a
+  single line owned by a wrapping `.ce-timeline` container, because
+  Timeline Entries are independent sibling `tt_content` records on a page
+  (not Collection children of anything) — there's no shared DOM node to
+  hang one continuous line off. Adjacent entries' segments sit flush and
+  read as one continuous line; only the last entry's segment is shortened
+  to stop at its own node instead of running past it.
+- **Contact Sidebar Card** (new): generic small panel, `variant` Select
+  (link/code) switches between a direct-contact link (icon + label +
+  arrow that reveals on hover) and a mono code block (e.g. a GPG key).
+- **Core Identity** (new): two-field panel for About's left sidebar
+  (`what_i_do` bold sentence, `academic_lines` textarea).
+
+New Select field values had to line up exactly with the Material Symbols
+subset above — if you add a new icon option to Service Card or
+Contact Sidebar Card's icon selects, add the icon name to the
+`pyftsubset --text=` list and regenerate
+`sitepackage_promo/Resources/Public/Fonts/material-symbols-outlined.woff2`,
+or it'll just render as a blank box.
+
+### Third container preset: 8/4 asymmetric split
+
+`sitepackage-split84` (colPos 240 wide / 241 narrow), registered the same
+way as the Session 2 presets. **Only the wide-first variant is built.**
+The About page design needs a *mirrored* 4/8 (narrow first), but About
+page assembly is out of scope for this session's required deliverable
+(Home + Services), so a `sitepackage-split48` mirrored preset was not
+added — add it the same way (swap colPos order in both the TCA
+registration and a new `Split48.html` template) when About gets built.
+
+### Nav / footer
+
+Nav labels (INDEX/SERVICES/REPO/CONTACT) and the About page's exclusion
+from nav are **not hardcoded** — they come from ordinary `nav_title` /
+`nav_hide` page fields, set via SQL this session (Home→INDEX,
+Services→SERVICES, Case Studies→REPO — "REPO" as in "repository of past
+work", CaseStudies is the only page that plausibly maps to it since the
+export's nav is identical on all 5 screens and never has more than these
+4 items — About isn't linked from primary nav on *any* exported screen,
+so `nav_hide=1` matches the source faithfully rather than being an
+oversight). This keeps `sitepackage_base`'s Header partial fully generic
+— a relaunch project just sets different `nav_title` values, no code
+changes.
+
+**Bug found and fixed**: a `directory` menu (used for
+Services/Case-Studies/Contact) structurally can't include the page it's
+rooted at, so Home never appeared in `mainnavigation`. Fixed generically
+with a second `special = list` MenuProcessor call (`homenavigation`,
+listing just `leveluid:0`, i.e. the root page) rendered before the main
+loop — no hardcoded page uid anywhere, root's own `nav_title` (already
+"INDEX") and active-state come through normally. **Second bug**, found
+right after: that active-state used `{navPage.active}`, which TYPO3 sets
+true for *every page in the current rootline*, not just the current page
+— since the root page is an ancestor of every page on the site, "INDEX"
+showed as active on every single page. Fixed by switching to
+`{navPage.current}` (exact-page-match, a real MenuProcessor output
+property, verified against `MenuProcessor.php`'s JSON template before
+using it) for both nav loops. If you ever see a top-level nav item
+staying highlighted on unrelated pages, check for this exact
+`active`-vs-`current` mixup first.
+
+### Deliberately deferred / simplified this session
+
+- **Hairline-grid canvas texture** (subtle 1px/0.5-opacity background
+  pattern DESIGN.md uses on Services and Case Studies, and a denser
+  variant on About): skipped. The `.bg-hairline-grid` utility class
+  exists in `base.css` but nothing applies it yet. It's page-specific
+  (not every page has it), and doing that properly without hardcoding a
+  page uid into the reusable `sitepackage_base` needs either a page-level
+  TypoScript condition in the *brand* package or a new page-property
+  toggle — not worth building for a barely-visible texture under this
+  session's time budget. Low visual risk if it's added later.
+- **Home bento teaser fidelity**: the "Core Upgrades" / "Extbase Dev"
+  cards reuse the Service Card block (icon optional, `tech_specs`
+  bulleted box) rather than a bespoke bento-card component. The actual
+  export shows small inline tag pills there (not a bulleted TECH_SPECS
+  box) and an "LTS" badge on Core Upgrades that Service Card has no field
+  for. Accepted as a disclosed simplification — reusing an existing block
+  beat adding a fourth near-duplicate card type for one homepage section.
+  Visually close; not pixel-identical.
+- **Case Studies, Contact, About page reassembly**: content blocks are
+  ready (status/tags on Project Card, Contact Sidebar Card, Core Identity,
+  multi-group Tech Badge List, Timeline location/current-state) but the
+  pages themselves still hold Session 3's old-schema content and render
+  with graceful degradation (missing fields just don't show — verified,
+  nothing errors). Explicitly lower priority per this session's brief
+  ("Case Studies and Contact can follow once the above is confirmed
+  working"); About wasn't in the required deliverable list at all.
+- **About/CV role-label text**: the brief flagged
+  `SENIOR_SYSTEMS_ARCHITECT` (in the export's identity line, e.g.
+  "IDENTITY: SENIOR_SYSTEMS_ARCHITECT // v_3.4.1 // 13+ MAJOR_UPGRADES")
+  as pending confirmation and said to hold the field rather than
+  hardcode it. Since About page assembly didn't happen this session
+  anyway, this never came up in practice — flagging it here so the next
+  session doesn't hardcode it from the export without checking back
+  first.
+
+### Verification performed
+
+- `content-blocks:lint` — clean (caught two real schema errors along the
+  way: `minitems: 0` isn't valid, must be omitted entirely to mean "no
+  minimum"; `Select` fields don't support a `required` key, use
+  `minitems: 1` instead — both are worth remembering for future blocks).
+- Curled all 5 pages + sitemap.xml + robots.txt — all 200.
+- Grepped every rendered page for `cdn.tailwindcss.com`,
+  `fonts.googleapis.com`, `fonts.gstatic.com` — zero matches anywhere.
+  Confirmed the merged/compressed CSS actually contains all 13
+  `@font-face` rules and that a font file 200s when requested directly
+  from its `_assets/` published path.
+- Logged into the backend, confirmed no PHP warnings on Services' Page
+  module (container/children render correctly there too, not just
+  frontend).
+- Screenshotted Home, Services, Case Studies, and About in-browser —
+  Home and Services visually match the reference screenshots closely
+  (fonts, colors, PCB trace with correct active v13 node, stat strip,
+  TECH_SPECS boxes, 3-col and 8/4 grids all correct); Case Studies/About
+  confirmed *not broken* with old-schema content, as expected.

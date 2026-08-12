@@ -7,7 +7,7 @@
         <source>Tech Badge List</source>
       </trans-unit>
       <trans-unit id="description">
-        <source>A labeled group of small tech/skill badges, e.g. "Backend: TYPO3, PHP, MariaDB".</source>
+        <source>One or more labeled groups of small tech/skill badges, e.g. "ENV.CORE: TYPO3, PHP, MariaDB".</source>
       </trans-unit>
     </body>
   </file>

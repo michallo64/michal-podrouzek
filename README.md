@@ -4,6 +4,13 @@ Personal TYPO3 promo/portfolio site. The site is itself part of the pitch:
 a hand-rolled site package (no page builder distribution) plus one small
 custom extension, built to read as production-quality TYPO3 13 LTS work.
 
+**Design**: "TYPO3_DEV_SPEC" — a clinical, spec-sheet aesthetic (IBM Plex
+Sans/Mono + Inter, sharp corners, hairline borders, no shadows). Ported
+from a Google Stitch export (`stitch_typo3_engineering_systems/`) with
+every color/type/spacing token as a real CSS custom property and every
+font self-hosted — no Tailwind CDN, no Google Fonts CDN. See
+`docs/BUILD_LOG.md` "Session 4" for the full story.
+
 ## Stack
 
 - TYPO3 13.4 LTS, Composer-based install (no classic installer)

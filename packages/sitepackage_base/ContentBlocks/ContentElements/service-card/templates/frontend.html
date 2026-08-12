@@ -3,13 +3,25 @@
     xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-<article class="ce-service-card">
-    <f:if condition="{data.icon}">
-        <span class="ce-service-card__icon ce-service-card__icon--{data.icon}" aria-hidden="true"></span>
-    </f:if>
-    <h3 class="ce-service-card__title">{data.header}</h3>
-    <f:if condition="{data.description}">
-        <p class="ce-service-card__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
+<article class="card ce-service-card">
+    <div>
+        <f:if condition="{data.icon}">
+            <span class="material-symbols-outlined ce-service-card__icon" aria-hidden="true">{data.icon}</span>
+        </f:if>
+        <h3 class="text-headline-card ce-service-card__title">{data.header}</h3>
+        <f:if condition="{data.description}">
+            <p class="ce-service-card__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
+        </f:if>
+    </div>
+    <f:if condition="{data.tech_specs}">
+        <div class="ce-service-card__specs">
+            <p class="text-label-tiny ce-service-card__specs-label">TECH_SPECS</p>
+            <ul class="ce-service-card__specs-list text-label-mono">
+                <f:for each="{data.tech_specs}" as="spec">
+                    <li>{spec.text}</li>
+                </f:for>
+            </ul>
+        </div>
     </f:if>
 </article>
 </html>

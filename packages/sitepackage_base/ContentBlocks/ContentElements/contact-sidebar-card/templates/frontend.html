@@ -1,0 +1,29 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<div class="ce-panel">
+    <h3 class="text-headline-card">{data.header}</h3>
+
+    <f:if condition="{data.variant} == 'code'">
+        <f:then>
+            <div class="ce-contact-sidebar-card__code">
+                <code>{data.code_content}</code>
+            </div>
+        </f:then>
+        <f:else>
+            <f:if condition="{data.intro_text}">
+                <p class="ce-project-card__description">{data.intro_text}</p>
+            </f:if>
+            <f:if condition="{data.link_target}">
+                <f:link.typolink parameter="{data.link_target}" class="ce-contact-sidebar-card__link">
+                    <span class="material-symbols-outlined">{f:if(condition: data.link_icon, then: data.link_icon, else: 'mail')}</span>
+                    <span>{data.link_label}</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </f:link.typolink>
+            </f:if>
+        </f:else>
+    </f:if>
+</div>
+</html>

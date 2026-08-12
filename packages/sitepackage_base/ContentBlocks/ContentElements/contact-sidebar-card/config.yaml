@@ -1,0 +1,49 @@
+name: sitepackage/contact-sidebar-card
+typeName: sitepackage_contact_sidebar_card
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: header
+    useExistingField: true
+    label: Headline
+  -
+    identifier: variant
+    type: Select
+    label: 'Card content'
+    renderType: selectSingle
+    items:
+      - { label: 'Direct contact link', value: link }
+      - { label: 'Code / mono block', value: code }
+    default: link
+    minitems: 1
+  -
+    identifier: intro_text
+    type: Textarea
+    label: 'Intro text (link variant)'
+  -
+    identifier: link_icon
+    type: Select
+    label: 'Link icon (link variant)'
+    renderType: selectSingle
+    default: mail
+    items:
+      - { label: Mail, value: mail }
+      - { label: Fingerprint, value: fingerprint }
+      - { label: Security, value: security }
+  -
+    identifier: link_label
+    type: Text
+    label: 'Link display text (link variant)'
+    placeholder: 'e.g. admin@example.com'
+  -
+    identifier: link_target
+    type: Link
+    label: 'Link target (link variant)'
+    nullable: true
+  -
+    identifier: code_content
+    type: Textarea
+    label: 'Code content (code variant)'
+    placeholder: '0x8A7B6C5D4E3F2A1B'

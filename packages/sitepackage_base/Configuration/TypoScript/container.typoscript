@@ -32,3 +32,14 @@ tt_content.sitepackage-cardgrid3 {
         100 = B13\Container\DataProcessing\ContainerProcessor
     }
 }
+
+tt_content.sitepackage-split84 < lib.contentElement
+tt_content.sitepackage-split84 {
+    templateName = Split84
+    templateRootPaths {
+        10 = EXT:sitepackage_base/Resources/Private/Templates/Container/
+    }
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}

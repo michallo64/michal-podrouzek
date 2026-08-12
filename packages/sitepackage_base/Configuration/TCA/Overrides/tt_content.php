@@ -38,7 +38,7 @@ call_user_func(static function (): void {
     );
 
     // Card grid: desktop 3 columns / tablet 2 / mobile 1 (see base.css
-    // .ce-card-grid). Intended for Service Card and Project Card content
+    // .grid-cards). Intended for Service Card and Project Card content
     // blocks — the `allowed` restriction below is declarative documentation
     // of that intent, not enforced: it only takes effect with
     // EXT:content_defender installed, which does not yet support TYPO3 13.
@@ -59,5 +59,23 @@ call_user_func(static function (): void {
                 ],
             ]
         ))->setIcon('container-3col')
+    );
+
+    // Asymmetric 8/4 split (see base.css .grid-split-8-4). Wide slot first,
+    // narrow slot second — matches the Home bento teaser and the Contact
+    // form/sidebar layout. A mirrored 4/8 variant is not registered yet;
+    // add "sitepackage-split48" the same way if a future page needs it.
+    $registry->configureContainer(
+        (new \B13\Container\Tca\ContainerConfiguration(
+            'sitepackage-split84',
+            'Split 8/4',
+            'An asymmetric two-column layout: a wide 8-column slot and a narrow 4-column slot.',
+            [
+                [
+                    ['name' => 'Wide (8 col)', 'colPos' => 240],
+                    ['name' => 'Narrow (4 col)', 'colPos' => 241],
+                ],
+            ]
+        ))->setIcon('container-2col-left')
     );
 });

@@ -5,19 +5,26 @@ prefixFields: true
 prefixType: full
 fields:
   -
-    identifier: group_label
-    type: Text
-    label: 'Group label'
-    placeholder: 'e.g. Backend, Frontend, Tools'
-  -
-    identifier: badges
+    identifier: groups
     type: Collection
-    label: Badges
-    labelField: label
+    label: 'Groups (e.g. ENV.CORE, ENV.FRONTEND, ENV.TOOLS, ENV.INTEGRATION)'
+    labelField: group_label
     minitems: 1
     fields:
       -
-        identifier: label
+        identifier: group_label
         type: Text
-        label: Badge
-        placeholder: 'e.g. TYPO3, PHP 8, MariaDB'
+        label: 'Group label'
+        placeholder: 'e.g. ENV.CORE'
+      -
+        identifier: badges
+        type: Collection
+        label: Badges
+        labelField: label
+        minitems: 1
+        fields:
+          -
+            identifier: label
+            type: Text
+            label: Badge
+            placeholder: 'e.g. TYPO3 v13, PHP 8.x'

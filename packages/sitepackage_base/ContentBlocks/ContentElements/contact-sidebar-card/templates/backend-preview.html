@@ -1,0 +1,20 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <cb:link.editRecord uid="{data.uid}" table="{data.mainType}">{data.header}</cb:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+    <f:if condition="{data.variant} == 'code'">
+        <f:then>{data.code_content}</f:then>
+        <f:else>{data.link_label}</f:else>
+    </f:if>
+</f:section>
+
+</html>

@@ -4,13 +4,17 @@
     data-namespace-typo3-fluid="true"
 >
 <div class="ce-tech-badge-list">
-    <f:if condition="{data.group_label}">
-        <h4 class="ce-tech-badge-list__group">{data.group_label}</h4>
-    </f:if>
-    <ul class="ce-tech-badge-list__badges">
-        <f:for each="{data.badges}" as="badge">
-            <li class="ce-tech-badge-list__badge">{badge.label}</li>
-        </f:for>
-    </ul>
+    <f:for each="{data.groups}" as="group">
+        <div class="ce-tech-badge-list__group">
+            <f:if condition="{group.group_label}">
+                <h4 class="text-label-mono ce-tech-badge-list__group-label">{group.group_label}</h4>
+            </f:if>
+            <ul class="ce-tech-badge-list__badges">
+                <f:for each="{group.badges}" as="badge">
+                    <li class="ce-tech-badge-list__badge text-label-tiny">{badge.label}</li>
+                </f:for>
+            </ul>
+        </div>
+    </f:for>
 </div>
 </html>

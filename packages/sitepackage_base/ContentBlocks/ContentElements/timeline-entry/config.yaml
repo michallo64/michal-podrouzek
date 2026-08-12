@@ -5,6 +5,10 @@ prefixFields: true
 prefixType: full
 fields:
   -
+    identifier: is_current
+    type: Checkbox
+    label: 'Current (filled node, highlighted date)'
+  -
     identifier: date_range
     type: Text
     label: 'Year / date range'
@@ -14,6 +18,11 @@ fields:
     useExistingField: true
     label: Title
   -
+    identifier: location
+    type: Text
+    label: 'Company / location'
+    placeholder: 'e.g. DEVSK s. r. o., Bratislava'
+  -
     identifier: description
     type: Textarea
-    label: Description
+    label: 'Description (optional)'

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-12T10:54:21+00:00" product-name="sitepackage/contact-sidebar-card">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Contact Sidebar Card</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>A small info card for a sidebar: either a direct-contact link (icon + label, arrow reveals on hover) or a mono code block (e.g. a GPG key).</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -5,25 +5,37 @@ prefixFields: true
 prefixType: full
 fields:
   -
+    identifier: status
+    type: Select
+    label: Status
+    renderType: selectSingle
+    items:
+      - { label: Stable, value: stable }
+      - { label: Critical, value: critical }
+      - { label: Archived, value: archived }
+    default: stable
+    minitems: 1
+  -
     identifier: header
     useExistingField: true
     label: 'Project title'
   -
-    identifier: project_type
-    type: Text
-    label: 'Project type'
-    placeholder: 'e.g. Retail, Professional services'
-  -
-    identifier: tech_stack
-    type: Text
-    label: 'Tech stack'
-    placeholder: 'Comma-separated, e.g. TYPO3, PHP, Stripe'
+    identifier: description
+    type: Textarea
+    label: Description
   -
     identifier: scale
     type: Text
     label: 'Scale / hour range'
-    placeholder: 'e.g. 40-60h, ~60 pages'
+    placeholder: 'e.g. 140-160 HOURS'
   -
-    identifier: description
-    type: Textarea
-    label: Description
+    identifier: tech_tags
+    type: Collection
+    label: 'Tech tags'
+    labelField: text
+    fields:
+      -
+        identifier: text
+        type: Text
+        label: Tag
+        placeholder: 'e.g. TYPO3 13 LTS'

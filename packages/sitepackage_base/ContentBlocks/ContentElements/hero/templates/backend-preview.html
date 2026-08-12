@@ -11,8 +11,12 @@
 </f:section>
 
 <f:section name="Content">
-    <f:if condition="{data.subheading}">{data.subheading}</f:if>
-    <f:if condition="{data.cta_label}"> — CTA: {data.cta_label}</f:if>
+    <f:if condition="{data.subheading}">{data.subheading}<br /></f:if>
+    <f:if condition="{data.stats}">
+        <f:for each="{data.stats}" as="stat" iteration="i"><f:if condition="{i.isFirst} == false"> // </f:if>{stat.text}</f:for>
+        <br />
+    </f:if>
+    <f:if condition="{data.cta_label}">CTA: {data.cta_label}</f:if>
 </f:section>
 
 </html>

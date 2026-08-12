@@ -1,0 +1,14 @@
+name: sitepackage/core-identity
+typeName: sitepackage_core_identity
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: what_i_do
+    type: Text
+    label: 'WHAT_I_DO (one bold sentence)'
+  -
+    identifier: academic_lines
+    type: Textarea
+    label: 'ACADEMIC_SYS (education, one line per entry)'

@@ -3,11 +3,15 @@
     xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-<article class="ce-timeline-entry">
+<article class="ce-timeline-entry{f:if(condition: data.is_current, then: ' ce-timeline-entry--current')}">
+    <span class="ce-timeline-entry__node" aria-hidden="true"></span>
     <f:if condition="{data.date_range}">
-        <p class="ce-timeline-entry__date">{data.date_range}</p>
+        <p class="text-label-mono ce-timeline-entry__date">{data.date_range}</p>
     </f:if>
-    <h3 class="ce-timeline-entry__title">{data.header}</h3>
+    <h3 class="text-headline-card ce-timeline-entry__title">{data.header}</h3>
+    <f:if condition="{data.location}">
+        <p class="ce-timeline-entry__location">{data.location}</p>
+    </f:if>
     <f:if condition="{data.description}">
         <p class="ce-timeline-entry__description"><f:format.nl2br>{data.description}</f:format.nl2br></p>
     </f:if>

@@ -5,9 +5,36 @@ prefixFields: true
 prefixType: full
 fields:
   -
+    identifier: version_nodes
+    type: Collection
+    label: 'Version path (upgrade-path graphic)'
+    labelField: label
+    fields:
+      -
+        identifier: label
+        type: Text
+        label: 'Node label'
+        placeholder: 'e.g. v13'
+      -
+        identifier: active
+        type: Checkbox
+        label: 'Current / active node'
+  -
     identifier: header
     useExistingField: true
     label: Heading
+  -
+    identifier: stats
+    type: Collection
+    label: 'Stat strip (rendered "//"-separated)'
+    labelField: text
+    maxitems: 4
+    fields:
+      -
+        identifier: text
+        type: Text
+        label: Stat
+        placeholder: 'e.g. 7 Years PHP Experience'
   -
     identifier: subheading
     type: Text

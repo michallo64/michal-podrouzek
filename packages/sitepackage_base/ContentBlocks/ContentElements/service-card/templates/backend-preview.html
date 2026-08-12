@@ -11,8 +11,11 @@
 </f:section>
 
 <f:section name="Content">
-    <f:if condition="{data.icon}">Icon: {data.icon}<br /></f:if>
-    {data.description}
+    <f:if condition="{data.icon}">[{data.icon}] </f:if>{data.description}
+    <f:if condition="{data.tech_specs}">
+        <br />
+        <f:for each="{data.tech_specs}" as="spec" iteration="i"><f:if condition="{i.isFirst} == false"> · </f:if>{spec.text}</f:for>
+    </f:if>
 </f:section>
 
 </html>

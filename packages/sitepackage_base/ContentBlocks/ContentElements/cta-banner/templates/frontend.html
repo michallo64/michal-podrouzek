@@ -4,16 +4,17 @@
     data-namespace-typo3-fluid="true"
 >
 <section class="ce-cta-banner">
-    <h2 class="ce-cta-banner__heading">{data.header}</h2>
+    <h2 class="text-headline-section ce-cta-banner__heading">{data.header}</h2>
     <f:if condition="{data.body}">
         <p class="ce-cta-banner__body"><f:format.nl2br>{data.body}</f:format.nl2br></p>
     </f:if>
     <f:if condition="{data.button_link}">
-        <f:link.typolink parameter="{data.button_link}" class="ce-cta-banner__button">
+        <f:link.typolink parameter="{data.button_link}" class="btn btn-primary">
             <f:if condition="{data.button_label}">
                 <f:then>{data.button_label}</f:then>
                 <f:else>Get in touch</f:else>
             </f:if>
+            <span class="material-symbols-outlined">arrow_forward</span>
         </f:link.typolink>
     </f:if>
 </section>

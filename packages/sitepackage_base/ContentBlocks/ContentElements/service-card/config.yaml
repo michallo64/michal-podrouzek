@@ -7,14 +7,17 @@ fields:
   -
     identifier: icon
     type: Select
-    label: Icon
+    label: 'Icon (Material Symbols Outlined name)'
     renderType: selectSingle
     items:
       - { label: Upgrade, value: upgrade }
-      - { label: Extension, value: extension }
-      - { label: Payment, value: payment }
-      - { label: Performance, value: performance }
-      - { label: Accessibility, value: accessibility }
+      - { label: 'API / Integration', value: api }
+      - { label: 'History / Legacy', value: history_edu }
+      - { label: Payments, value: payments }
+      - { label: Speed, value: speed }
+      - { label: Accessibility, value: accessibility_new }
+      - { label: Hub, value: hub }
+      - { label: Security, value: security }
   -
     identifier: header
     useExistingField: true
@@ -23,3 +26,14 @@ fields:
     identifier: description
     type: Textarea
     label: Description
+  -
+    identifier: tech_specs
+    type: Collection
+    label: 'TECH_SPECS bullet list'
+    labelField: text
+    fields:
+      -
+        identifier: text
+        type: Text
+        label: Item
+        placeholder: 'e.g. 13+ Successful Migrations'

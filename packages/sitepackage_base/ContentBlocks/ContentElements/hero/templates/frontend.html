@@ -4,16 +4,39 @@
     data-namespace-typo3-fluid="true"
 >
 <section class="ce-hero">
-    <h1 class="ce-hero__heading">{data.header}</h1>
+    <f:if condition="{data.version_nodes}">
+        <div class="hero-trace">
+            <f:for each="{data.version_nodes}" as="node">
+                <div class="hero-trace__node{f:if(condition: node.active, then: ' hero-trace__node--active')}">
+                    <span class="hero-trace__dot"></span>
+                    <span class="hero-trace__label">{node.label}</span>
+                </div>
+            </f:for>
+        </div>
+    </f:if>
+
+    <h1 class="text-display-hero ce-hero__heading">{data.header}</h1>
+
     <f:if condition="{data.subheading}">
         <p class="ce-hero__subheading">{data.subheading}</p>
     </f:if>
+
+    <f:if condition="{data.stats}">
+        <div class="hero-stats">
+            <f:for each="{data.stats}" as="stat" iteration="i">
+                <f:if condition="{i.isFirst} == false"><span class="hero-stats__sep">//</span></f:if>
+                <span>{stat.text}</span>
+            </f:for>
+        </div>
+    </f:if>
+
     <f:if condition="{data.cta_link}">
-        <f:link.typolink parameter="{data.cta_link}" class="ce-hero__cta">
+        <f:link.typolink parameter="{data.cta_link}" class="btn btn-primary">
             <f:if condition="{data.cta_label}">
                 <f:then>{data.cta_label}</f:then>
                 <f:else>Learn more</f:else>
             </f:if>
+            <span class="material-symbols-outlined">arrow_forward</span>
         </f:link.typolink>
     </f:if>
 </section>

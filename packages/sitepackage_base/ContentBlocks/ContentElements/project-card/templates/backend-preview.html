@@ -11,7 +11,11 @@
 </f:section>
 
 <f:section name="Content">
-    {data.project_type} — {data.tech_stack} — {data.scale}
+    [{data.status}] {data.scale}
+    <f:if condition="{data.tech_tags}">
+        <br />
+        <f:for each="{data.tech_tags}" as="tag" iteration="i"><f:if condition="{i.isFirst} == false">, </f:if>{tag.text}</f:for>
+    </f:if>
 </f:section>
 
 </html>

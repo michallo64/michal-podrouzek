@@ -1,0 +1,324 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About / CV - TYPO3_DEV_SPEC</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-fixed": "#390b00",
+                "surface-variant": "#e0e3e7",
+                "secondary-fixed-dim": "#bdc7d8",
+                "inverse-surface": "#2d3134",
+                "tertiary": "#882700",
+                "surface-dim": "#d7dade",
+                "on-secondary": "#ffffff",
+                "surface": "#f7f9fe",
+                "on-secondary-fixed": "#121c28",
+                "secondary-container": "#d6e0f1",
+                "primary-fixed": "#a6f3c6",
+                "inverse-on-surface": "#eef1f5",
+                "surface-bright": "#f7f9fe",
+                "tertiary-fixed": "#ffdbd0",
+                "outline": "#6f7a72",
+                "inverse-primary": "#8ad7ab",
+                "on-secondary-container": "#596372",
+                "on-primary-container": "#a0edc0",
+                "on-primary-fixed": "#002112",
+                "on-error": "#ffffff",
+                "tertiary-fixed-dim": "#ffb59e",
+                "background": "#f7f9fe",
+                "on-surface": "#181c1f",
+                "on-surface-variant": "#3f4942",
+                "tertiary-container": "#b13500",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#842500",
+                "secondary-fixed": "#d9e3f4",
+                "surface-container-high": "#e5e8ec",
+                "on-tertiary-container": "#ffd3c6",
+                "primary-container": "#1f6e4a",
+                "on-background": "#181c1f",
+                "secondary": "#555f6d",
+                "primary-fixed-dim": "#8ad7ab",
+                "primary": "#005535",
+                "surface-container": "#ebeef2",
+                "on-primary-fixed-variant": "#005233",
+                "surface-tint": "#1b6b47",
+                "on-primary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#bfc9c0",
+                "surface-container-low": "#f1f4f8",
+                "error-container": "#ffdad6",
+                "on-tertiary": "#ffffff",
+                "surface-container-highest": "#e0e3e7",
+                "error": "#ba1a1a",
+                "on-secondary-fixed-variant": "#3e4755"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "xl": "4rem",
+                "unit": "4px",
+                "sm": "0.75rem",
+                "lg": "2rem",
+                "max-width": "72rem",
+                "xs": "0.5rem",
+                "gutter": "2rem",
+                "md": "1.5rem"
+        },
+        "fontFamily": {
+                "headline-card": [
+                        "IBM Plex Sans"
+                ],
+                "label-mono": [
+                        "IBM Plex Mono"
+                ],
+                "body-base": [
+                        "Inter"
+                ],
+                "label-tiny": [
+                        "IBM Plex Mono"
+                ],
+                "display-hero-mobile": [
+                        "IBM Plex Sans"
+                ],
+                "display-hero": [
+                        "IBM Plex Sans"
+                ],
+                "headline-section": [
+                        "IBM Plex Sans"
+                ]
+        },
+        "fontSize": {
+                "headline-card": [
+                        "18px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-mono": [
+                        "14px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-base": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-tiny": [
+                        "13px",
+                        {
+                                "lineHeight": "1.0",
+                                "letterSpacing": "0.03em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display-hero-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-hero": [
+                        "36px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-section": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Grid background pattern */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, #e0e3e7 1px, transparent 1px),
+                              linear-gradient(to bottom, #e0e3e7 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-base bg-grid-pattern antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-sm max-w-max-width mx-auto bg-surface border-b border-outline-variant flat no shadows docked full-width top-0">
+<div class="font-label-mono text-label-mono font-bold text-on-surface">
+            TYPO3_DEV_SPEC
+        </div>
+<div class="hidden md:flex space-x-md">
+<a class="font-label-mono text-label-mono text-secondary hover:text-primary transition-colors opacity-80" href="#">INDEX</a>
+<a class="font-label-mono text-label-mono text-secondary hover:text-primary transition-colors opacity-80" href="#">SERVICES</a>
+<a class="font-label-mono text-label-mono text-primary border-b border-primary transition-colors opacity-80" href="#">REPO</a>
+<a class="font-label-mono text-label-mono text-secondary hover:text-primary transition-colors opacity-80" href="#">CONTACT</a>
+</div>
+<div class="flex items-center gap-xs font-label-mono text-label-mono mr-md"><span class="text-primary">EN</span><span class="text-outline-variant">//</span><span class="text-secondary hover:text-primary cursor-pointer transition-colors">SK</span></div><button class="bg-tertiary text-on-tertiary font-label-mono text-label-mono px-md py-xs rounded-none border border-tertiary hover:bg-surface hover:text-tertiary transition-colors">
+            HIRE_ME
+        </button>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-xl px-4 md:px-lg max-w-max-width mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-xl border-b border-outline-variant pb-md"><div class="flex items-center gap-xs font-label-mono text-label-tiny mb-sm"><span class="text-primary">LOCALE: EN</span><span class="text-outline-variant">/</span><span class="text-secondary hover:text-primary cursor-pointer transition-colors">SK</span></div>
+<div class="w-24 h-24 border-2 border-primary mb-md overflow-hidden flex-shrink-0"><img alt="Identity Photo" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYZIl8wKS5dJCjs7dOAT9TL-tChAANppZnd9CLVgBtY_YEg6x7ZRc5yU0aoATnQdeUyjiEZumIHBnAmtv9X8wOBn813kwCtTT2p9_UJBjRjUmjmn_AFQtXeQVEf1N4A6zsSH8dchcLFln6ImE4zrP0Di023WD2EedUhSIpQNUIezGJVkJhbWLFNhTeutMgtNgByLR1F8sXryVeQat2QtUfARZaaCzLofHxelbNQSs7SGiI1KBdY3Bp"></div><h1 class="font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero text-on-surface mb-xs">
+                CURRICULUM_VITAE
+            </h1>
+<p class="font-label-mono text-label-mono text-secondary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]">fingerprint</span> IDENTITY: SENIOR_SYSTEMS_ARCHITECT // v_3.4.1 // 13+ MAJOR_UPGRADES</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column: Background & Tech -->
+<div class="lg:col-span-4 space-y-lg">
+<!-- Engineering Background Panel -->
+<section class="bg-surface-container-lowest border border-outline-variant p-md"><div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-sm"><span class="material-symbols-outlined text-primary">psychology</span><h2 class="font-headline-card text-headline-card text-on-surface">CORE_IDENTITY</h2></div><div class="space-y-4"><div><p class="font-label-tiny text-label-tiny text-secondary mb-1">WHAT_I_DO</p><p class="font-body-base text-body-base text-on-surface font-semibold">Architecting high-performance TYPO3 ecosystems and bridging hardware-software interfaces.</p></div><div><p class="font-label-tiny text-label-tiny text-secondary mb-1">ACADEMIC_SYS</p><p class="font-body-base text-body-base text-on-surface">Ing. (MSc) Cybernetics — Applied Mechatronics and Electromobility, FEI STU Bratislava (2021).<br>Bc. (BSc) Applied Informatics — Modelling and Simulation of Discrete Event Systems, FEI STU Bratislava (2019).</p></div></div></section>
+<!-- Tech Stack Badges -->
+<section class="bg-surface-container-lowest border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary">data_object</span>
+<h2 class="font-headline-card text-headline-card text-on-surface">TECH_REGISTRY</h2>
+</div>
+<div class="space-y-md">
+<!-- Core -->
+<div>
+<h3 class="font-label-mono text-label-mono text-secondary mb-sm uppercase tracking-wider">ENV.CORE</h3>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">TYPO3 v11/v12/v13</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">PHP 8.x</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Yii2</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Laravel</span>
+</div>
+</div>
+<!-- Frontend -->
+<div>
+<h3 class="font-label-mono text-label-mono text-secondary mb-sm uppercase tracking-wider">ENV.FRONTEND</h3>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">JavaScript ES6</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Tailwind CSS</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">SCSS</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Webpack</span>
+</div>
+</div>
+<!-- Tools -->
+<div>
+<h3 class="font-label-mono text-label-mono text-secondary mb-sm uppercase tracking-wider">ENV.TOOLS</h3>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-tiny text-label-tiny text-primary px-2 py-1 border border-primary">Composer</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Git</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">DDEV</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Docker</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">CI/CD</span>
+</div>
+</div>
+<!-- Integration -->
+<div>
+<h3 class="font-label-mono text-label-mono text-secondary mb-sm uppercase tracking-wider">ENV.INTEGRATION</h3>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">REST APIs</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">GraphQL</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Stripe</span>
+<span class="font-label-tiny text-label-tiny text-on-surface px-2 py-1 border border-outline-variant">Solr</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Timeline -->
+<div class="lg:col-span-8">
+<section class="bg-surface-container-lowest border border-outline-variant p-md relative">
+<div class="flex items-center gap-sm mb-lg border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary">history</span>
+<h2 class="font-headline-card text-headline-card text-on-surface">TIMELINE_LOG</h2>
+</div>
+<!-- Vertical Line for Timeline -->
+<div class="absolute left-[2.25rem] top-[5.5rem] bottom-md w-px bg-outline-variant"></div>
+<div class="space-y-xl pl-6">
+<!-- Timeline Item 1 -->
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 bg-surface border-2 border-primary rounded-none"></div>
+<div class="font-label-mono text-label-mono text-primary mb-xs font-bold">2021 - PRESENT</div>
+<h3 class="font-headline-card text-headline-card text-on-surface mb-xs">TYPO3 Developer</h3>
+<p class="font-label-tiny text-label-tiny text-secondary mb-sm">DEVSK s. r. o., Bratislava</p>
+<p class="font-body-base text-body-base text-on-surface-variant">Technical subcontractor for DACH agencies. Focus: custom extensions, upgrades, payment integrations.</p>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 bg-surface border-2 border-outline-variant rounded-none"></div>
+<div class="font-label-mono text-label-mono text-secondary mb-xs">03/2019 - 2021</div>
+<h3 class="font-headline-card text-headline-card text-on-surface mb-xs">PHP Developer</h3>
+<p class="font-label-tiny text-label-tiny text-secondary mb-sm">ITAPS s. r. o., Bratislava</p>
+<p class="font-body-base text-body-base text-on-surface-variant">
+                                Internal business system (Yii2, MySQL).
+                            </p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 bg-surface border-2 border-outline-variant rounded-none"></div>
+<div class="font-label-mono text-label-mono text-secondary mb-xs">04/2018 - 01/2019</div>
+<h3 class="font-headline-card text-headline-card text-on-surface mb-xs">Customer Care Support</h3>
+<p class="font-label-tiny text-label-tiny text-secondary mb-sm">Sygic a. s.</p>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 bg-surface border-2 border-outline-variant rounded-none"></div>
+<div class="font-label-mono text-label-mono text-secondary mb-xs">04/2016 - 04/2018</div>
+<h3 class="font-headline-card text-headline-card text-on-surface mb-xs">Backoffice Support / Testing</h3>
+<p class="font-label-tiny text-label-tiny text-secondary mb-sm">mBank a. s.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg px-lg grid grid-cols-2 md:grid-cols-4 gap-md max-w-max-width mx-auto bg-surface border-t border-outline-variant flat no shadows full-width bottom">
+<div class="font-label-mono text-label-mono text-primary col-span-2 md:col-span-1">
+            TYPO3_DEV_SPEC
+        </div>
+<div class="col-span-2 md:col-span-3 flex justify-end space-x-md">
+<a class="font-label-tiny text-label-tiny text-secondary hover:text-primary transition-all duration-150" href="#">v1.0.0</a>
+<a class="font-label-tiny text-label-tiny text-secondary hover:text-primary transition-all duration-150" href="#">STK_STATUS</a>
+<a class="font-label-tiny text-label-tiny text-secondary hover:text-primary transition-all duration-150" href="#">GPG_KEY</a>
+<a class="font-label-tiny text-label-tiny text-secondary hover:text-primary transition-all duration-150" href="#">LEGAL</a>
+</div>
+<div class="col-span-full font-label-tiny text-label-tiny text-secondary mt-md">
+            © 2024 TYPO3_DEV_SPEC. SYSTEM_STABLE
+        </div>
+</footer>
+
+
+</body></html>

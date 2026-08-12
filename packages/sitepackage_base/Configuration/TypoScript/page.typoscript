@@ -71,11 +71,26 @@ page {
                 titleField = nav_title // title
                 as = mainnavigation
             }
+
+            # A "directory" menu lists a page's children, never the page
+            # itself — so the site root (Home) can't appear in `mainnavigation`
+            # above. This second, single-item menu supplies it generically
+            # (root's own nav_title/nav_hide/active-state), no hardcoded uid.
+            20 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            20 {
+                special = list
+                special.value.data = leveluid:0
+                titleField = nav_title // title
+                as = homenavigation
+            }
         }
 
         variables {
             siteName = TEXT
             siteName.value = {$sitepackage.siteName}
+
+            brandmark = TEXT
+            brandmark.value = {$sitepackage.brandmark}
 
             siteTagline = TEXT
             siteTagline.value = {$sitepackage.siteTagline}
