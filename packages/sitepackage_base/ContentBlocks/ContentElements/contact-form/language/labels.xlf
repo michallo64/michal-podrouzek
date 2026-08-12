@@ -10,16 +10,16 @@
         <source>Name/email/requirements contact form, styled to match the site. Presentational only for now — no mail-sending backend wired up yet.</source>
       </trans-unit>
       <trans-unit id="field.name">
-        <source>IDENTIFIER (NAME)</source>
+        <source>Name</source>
       </trans-unit>
       <trans-unit id="field.email">
-        <source>COMM_CHANNEL (EMAIL)</source>
+        <source>Email</source>
       </trans-unit>
       <trans-unit id="field.requirements">
-        <source>PROJECT_REQUIREMENTS</source>
+        <source>Project Details</source>
       </trans-unit>
       <trans-unit id="field.submit">
-        <source>EXECUTE_TRANSMISSION</source>
+        <source>Send Message</source>
       </trans-unit>
     </body>
   </file>

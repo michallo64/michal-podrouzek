@@ -9,6 +9,9 @@
       <trans-unit id="description">
         <source>One or more labeled groups of small tech/skill badges, e.g. "ENV.CORE: TYPO3, PHP, MariaDB".</source>
       </trans-unit>
+      <trans-unit id="label.tech_stack">
+        <source>Tech Stack</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

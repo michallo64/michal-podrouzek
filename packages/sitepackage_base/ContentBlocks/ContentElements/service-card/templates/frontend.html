@@ -15,7 +15,7 @@
     </div>
     <f:if condition="{data.tech_specs}">
         <div class="ce-service-card__specs">
-            <p class="text-label-tiny ce-service-card__specs-label">TECH_SPECS</p>
+            <p class="text-label-tiny ce-service-card__specs-label"><f:translate key="{cb:languagePath()}:label.tech_stack" /></p>
             <ul class="ce-service-card__specs-list text-label-mono">
                 <f:for each="{data.tech_specs}" as="spec">
                     <li>{spec.text}</li>

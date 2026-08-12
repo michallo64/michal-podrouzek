@@ -907,3 +907,90 @@ Project Card's `tech_tags` stayed untranslated in Session 6. Date ranges
   header, two-column layout, Core Identity, Tech Registry (all 4 groups
   with correct badges), and Timeline (4 entries, current-role node
   styled distinctly) all match the confirmed design, no console errors.
+
+## Session 8: dropped the SNAKE_CASE_SYSTEM_VOICE labels
+
+Feedback: the `ALL_CAPS_WITH_UNDERSCORES` labels sprinkled through the
+`TYPO3_DEV_SPEC` design (`CURRICULUM_VITAE`, `EXECUTE_TRANSMISSION`,
+`TECH_REGISTRY`, ...) read as "geeky and cringy," not professional.
+Confirmed direction: keep the visual system (mono font, hairline
+borders, `//` separators, bracket-style eyebrow tags) — only the
+wording was the problem — and use the real name **Michal Podroužek**
+for the brandmark instead of the stylized `TYPO3_DEV_SPEC` wordmark.
+
+### What changed
+
+Every literal `SNAKE_CASE` label site-wide, normal Title Case or
+sentence case, no underscores:
+
+- **Global chrome**: brandmark (`sitepackage.brandmark` TypoScript
+  constant) → "Michal Podroužek"; `HIRE_ME` → "Hire Me"; footer dropped
+  `SYSTEM_STABLE` (meaningless without a real status feed) and the
+  dead `STK_STATUS` link (`href="#"`, never pointed anywhere), kept
+  `GPG_KEY`/`LEGAL` with normal casing.
+- **Nav** (`pages.nav_title`, both languages): `INDEX` → Home/Domov,
+  `REPO` → Case Studies/Prípadové štúdie (it never linked to a
+  repository — a leftover, misleading name), `SERVICES`/`CONTACT` →
+  Title Case, translated properly per language instead of staying
+  English chrome.
+- **Services**: H1 `SYSTEM_SERVICES` → "Services"/"Služby"; Service
+  Card's `TECH_SPECS` → "Tech Stack".
+- **Case Studies**: eyebrow `[SYS_LOG: CASE_STUDIES // ANONYMIZED]` →
+  "Selected Work — client details anonymized" (translated for SK too).
+- **About**: `CURRICULUM_VITAE` → "About"/"O mne"; dropped the
+  `IDENTITY: ... // v_3.4.1 // ...` fake-version-number line entirely
+  in favor of a plain "TYPO3 Developer · 13+ major upgrades shipped"
+  (translated properly on SK, not left as English chrome); Core
+  Identity's `CORE_IDENTITY`/`WHAT_I_DO`/`ACADEMIC_SYS` → "Profile"/
+  "What I Do"/"Education"; Tech Registry's `TECH_REGISTRY` → "Tech
+  Stack"; `TIMELINE_LOG` → "Experience"/"Skúsenosti"; timeline date
+  range's `PRESENT` → "Present".
+- **Contact**: H1 `INITIALIZE_CONTACT` → "Get in Touch"/"Kontaktujte
+  ma"; form fields `IDENTIFIER (NAME)`/`COMM_CHANNEL (EMAIL)`/
+  `PROJECT_REQUIREMENTS`/`EXECUTE_TRANSMISSION` → "Name"/"Email"/
+  "Project Details"/"Send Message" (both languages — the SK
+  translations had literally transliterated the underscores, e.g.
+  `KOMUNIKAČNÝ_KANÁL`, which was worse); sidebar cards `DIRECT_LINK`/
+  `GPG_KEY_PUB` → "Email Me"/"GPG Public Key".
+- **Home**: Hero's CTA button field (`sitepackage_hero_cta_label`,
+  literally stored as `[INITIATE_CONTACT]` with brackets baked into
+  the DB value) → "Get in Touch"/"Kontaktujte ma". Missed on the first
+  pass — it lives in a DB field, not a template, so the initial
+  template-and-eyebrow sweep didn't catch it. Found by grepping every
+  rendered page (EN + SK) for the `[A-Z]{2,}_[A-Z_]{2,}` pattern after
+  the first round of fixes and re-running the sweep until it came back
+  clean everywhere.
+
+**Left as-is, deliberately**: Case Studies' status badges (`STABLE`/
+`CRITICAL`/`ARCHIVED`) — single all-caps words used as genuine status
+indicators is a normal, common UI pattern (unlike the underscore-joined
+system-log phrasing elsewhere), and changing the enum values would mean
+touching the `badge--{data.status}` CSS class binding for no real gain.
+`v1.0.0` in the footer was kept too — a version number is a reasonable,
+unpretentious detail for a developer's own site footer.
+
+### Fixed as a side effect: three Content Blocks gained real i18n
+
+`core-identity`, `tech-badge-list`, and `service-card` had their
+labels hardcoded in English directly in the Fluid template (the
+Session 6 rule was "spec-chrome stays English by design," which no
+longer applies now that this is normal wording, not chrome). Converted
+all three to the `<f:translate key="{cb:languagePath()}:label.x" />` +
+`labels.xlf`/`sk.labels.xlf` pattern already established by the
+Contact Form block in Session 5 — the right general pattern, now
+applied consistently everywhere it's needed instead of only in one
+place.
+
+### Verification performed
+
+- Curled all 5 English pages + all 5 Slovak pages — all 200.
+- Grepped every rendered page (EN + SK, 10 URLs) for
+  `\[?[A-Z]{2,}_[A-Z_]{2,}\]?` — clean on every page after the Hero CTA
+  fix above; this is what caught the missed Home page instance.
+- `content-blocks:lint` — clean.
+- Re-checked for CDN references — none (unrelated to this change, but
+  cheap to re-verify after touching this many templates).
+- Browser screenshots of Home, About, and Contact (English) — brandmark,
+  nav, hero CTA, About header/Profile/Tech Stack/Experience, and the
+  Contact form/sidebar/footer all read as normal professional copy;
+  mono font, hairline borders, and card layout unchanged from before.

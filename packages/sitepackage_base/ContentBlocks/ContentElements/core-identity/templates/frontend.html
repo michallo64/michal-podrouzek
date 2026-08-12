@@ -6,17 +6,17 @@
 <div class="ce-panel ce-core-identity">
     <div class="ce-panel__header">
         <span class="material-symbols-outlined">psychology</span>
-        <h2 class="text-headline-card">CORE_IDENTITY</h2>
+        <h2 class="text-headline-card"><f:translate key="{cb:languagePath()}:label.profile" /></h2>
     </div>
     <f:if condition="{data.what_i_do}">
         <div class="ce-core-identity__field">
-            <p class="text-label-tiny ce-core-identity__label">WHAT_I_DO</p>
+            <p class="text-label-tiny ce-core-identity__label"><f:translate key="{cb:languagePath()}:label.what_i_do" /></p>
             <p class="ce-core-identity__value">{data.what_i_do}</p>
         </div>
     </f:if>
     <f:if condition="{data.academic_lines}">
         <div class="ce-core-identity__field">
-            <p class="text-label-tiny ce-core-identity__label">ACADEMIC_SYS</p>
+            <p class="text-label-tiny ce-core-identity__label"><f:translate key="{cb:languagePath()}:label.education" /></p>
             <p><f:format.nl2br>{data.academic_lines}</f:format.nl2br></p>
         </div>
     </f:if>

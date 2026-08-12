@@ -1,22 +1,19 @@
 <?xml version="1.0"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file datatype="plaintext" original="labels.xlf" source-language="en" date="2026-08-12T10:56:09+00:00" product-name="sitepackage/core-identity">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" target-language="sk" product-name="sitepackage/core-identity">
     <header/>
     <body>
-      <trans-unit id="title">
-        <source>Core Identity</source>
-      </trans-unit>
-      <trans-unit id="description">
-        <source>A two-field summary panel for an About/CV page: what you do (one sentence) and education background.</source>
-      </trans-unit>
       <trans-unit id="label.profile">
         <source>Profile</source>
+        <target>Profil</target>
       </trans-unit>
       <trans-unit id="label.what_i_do">
         <source>What I Do</source>
+        <target>Čo robím</target>
       </trans-unit>
       <trans-unit id="label.education">
         <source>Education</source>
+        <target>Vzdelanie</target>
       </trans-unit>
     </body>
   </file>

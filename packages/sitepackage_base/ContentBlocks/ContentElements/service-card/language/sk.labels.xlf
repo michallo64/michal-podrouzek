@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file datatype="plaintext" original="labels.xlf" source-language="en" target-language="sk" product-name="sitepackage/service-card">
+    <header/>
+    <body>
+      <trans-unit id="label.tech_stack">
+        <source>Tech Stack</source>
+        <target>Technológie</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

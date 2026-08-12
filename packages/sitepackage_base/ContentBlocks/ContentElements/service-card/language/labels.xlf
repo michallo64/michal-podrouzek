@@ -9,6 +9,9 @@
       <trans-unit id="description">
         <source>One service offering: icon, title and a short description. Repeat inside a card grid.</source>
       </trans-unit>
+      <trans-unit id="label.tech_stack">
+        <source>Tech Stack</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
